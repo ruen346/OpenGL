@@ -1,3 +1,19 @@
-﻿  ex1_1.cpp
-c:\users\rnrjs\desktop\개발\개발 파일\opengl\ex1\ex1\ex1_1.cpp(6): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
-  ex1.vcxproj -> C:\Users\rnrjs\Desktop\개발\개발 파일\OpenGL\ex1\Debug\ex1.exe
+﻿  ex1_3.cpp
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(13): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(14): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(24): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(25): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(26): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(37): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(38): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(39): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(40): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(51): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(52): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(53): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(54): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(55): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(60): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_3.cpp(61): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LINK : C:\Users\구건모\Desktop\개발\OpenGL\ex1\Debug\ex1.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  ex1.vcxproj -> C:\Users\구건모\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
