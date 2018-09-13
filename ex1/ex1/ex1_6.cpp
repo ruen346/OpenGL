@@ -14,6 +14,8 @@ int now = 0;
 float times = 0;
 int start = 0;
 int speed = 20;
+int what = 0;
+int pause = 0;
 
 void Timer(int value)
 {
@@ -107,14 +109,18 @@ void Timer(int value)
 			else if (set_go[i] == 4)
 			{
 				if (set_x[i] < 350)
+				{
 					set_save[i] = 0;
+					set_go[i] = 0;
+				}
 				else
 					set_x[i] -= 10;
 			}
 		}
 	}
 	glutPostRedisplay(); // 화면 재 출력 
-	glutTimerFunc(speed, Timer, 1); // 타이머함수 재 설정
+	if(pause == 0)
+		glutTimerFunc(speed, Timer, 1); // 타이머함수 재 설정
 }
 
 void Mouse(int button, int state, int x, int y)
@@ -144,6 +150,19 @@ void Keyboard(unsigned char key, int x, int y)
 		if (speed > 1)
 			speed--;
 		break;
+	case 'd':
+		if (what == 0)
+			what = 1;
+		else
+			what = 0;
+		break;
+	case 'z':
+		pause = 1;
+		break;
+
+	case 'x':
+		pause = 0;
+		glutTimerFunc(speed, Timer, 1);
 
 	case '0':
 		set_save[0] = 1;
@@ -215,7 +234,19 @@ GLvoid drawScene(GLvoid)
 	glColor4f(as, as, as, 1.0f);
 	for (int i = 0; i < start; i++)
 	{
-		glRectf(set_x[i], set_y[i], set_x[i] + times * 2, set_y[i] + times * 2); // 사각형 그리기 
+		if (what == 0)
+			glRectf(set_x[i], set_y[i], set_x[i] + times * 2, set_y[i] + times * 2); // 사각형 그리기
+		else
+		{
+			GLint p1[2] = { set_x[i] + times, set_y[i] };
+			GLint p2[2] = { set_x[i], set_y[i] + times * 2 };
+			GLint p3[2] = { set_x[i] + times * 2, set_y[i] + times * 2 };
+			glBegin(GL_TRIANGLES);
+			glVertex2iv(p1);
+			glVertex2iv(p2);
+			glVertex2iv(p3); 
+			glEnd();
+		}
 	}
 
 	glFlush(); // 화면에 출력하기 
