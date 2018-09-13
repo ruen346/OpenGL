@@ -1,6 +1,7 @@
-#include <GL/freeglut.h> 
+#include <GL/freeglut.h>
 #include <time.h>
 #include <iostream>
+#include <math.h>
 using namespace std;
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
@@ -60,9 +61,13 @@ GLvoid drawScene(GLvoid)
 	float as = times / 50;
 	glColor4f(as, 0, as, 1.0f);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 36; i++)
 	{
-		glRectf(set_x[i], set_y[i], set_x[i] + 5, set_y[i] + 5); // 사각형 그리기 
+		float ii = i;
+		float ss = (ii / 36 * 6.28);
+		float xs = set_x[0] + times2 * cos(ss);
+		float ys = set_y[0] + times2 * sin(ss);
+		glRectf(xs, ys, xs + 5, ys + 5); // 사각형 그리기 
 	}
 	glFlush(); // 화면에 출력하기 
 }
