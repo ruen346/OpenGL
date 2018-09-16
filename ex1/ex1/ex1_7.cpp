@@ -8,9 +8,10 @@ GLvoid Reshape(int w, int h);
 
 int set_x[10];
 int set_y[10];
-int now;
+int now = 0;
+int now2 = 0;
 float times = 0;
-float times2 = 0;
+float times2[5];
 
 void Timer(int value)
 {
@@ -18,7 +19,11 @@ void Timer(int value)
 		times = 0;
 	else
 		times++;
-	times2++;
+
+	for (int z = 0; z < now2 / 2; z++)
+	{
+		times2[z]++;
+	}
 	glutPostRedisplay(); // 화면 재 출력 
 	glutTimerFunc(20, Timer, 1); // 타이머함수 재 설정
 }
@@ -27,6 +32,9 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
+		if (now2 < 10)
+			now2++;
+
 		set_x[now] = x;
 		set_y[now] = y;
 		if (now < 10)
@@ -61,13 +69,25 @@ GLvoid drawScene(GLvoid)
 	float as = times / 50;
 	glColor4f(as, 0, as, 1.0f);
 
-	for (int i = 0; i < 36; i++)
+	for (int j = 0; j < now2; j++)
 	{
-		float ii = i;
-		float ss = (ii / 36 * 6.28);
-		float xs = set_x[0] + times2 * cos(ss);
-		float ys = set_y[0] + times2 * sin(ss);
-		glRectf(xs, ys, xs + 5, ys + 5); // 사각형 그리기 
+		for (int i = 0; i < 36; i++)
+		{
+			float ii = i;
+			float ss = (ii / 36 * 6.28);
+			float xs, ys;
+			if (j % 2 == 1)
+			{
+				xs = set_x[j] + times2[j / 2] * cos(ss);
+				ys = set_y[j] + times2[j / 2] * sin(ss);
+			}
+			else
+			{
+				xs = set_x[j] + times * cos(ss);
+				ys = set_y[j] + times * sin(ss);
+			}
+			glRectf(xs, ys, xs + 5, ys + 5); // 사각형 그리기 
+		}
 	}
 	glFlush(); // 화면에 출력하기 
 }
