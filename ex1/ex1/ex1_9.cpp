@@ -13,10 +13,11 @@ struct nemo
 	float color1;
 	float color2;
 	float color3;
-	float active = 0;
+	float active = 1;
 };
 
 nemo nemos[100];
+nemo ch;
 
 
 void Timer(int value)
@@ -30,8 +31,22 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-
+		ch.active = 1;
+		for (int i = 0; i < 100; i++)
+		{
+			if(ch.x < nemos[i].x + 15)
+		}
 	}
+	else if((button == GLUT_LEFT_BUTTON && state == GLUT_UP))
+	{
+		ch.active = 0;
+	}
+}
+
+void Motion(int x, int y) 
+{
+	ch.x = x;
+	ch.y = y; 
 }
 
 
@@ -43,6 +58,16 @@ void main(int argc, char *argv[])
 	{
 		nemos[i].x = rand() % 800;
 		nemos[i].y = rand() % 600;
+		nemos[i].color1 = rand() % 10;
+		nemos[i].color1 /= 10;
+		nemos[i].color2 = rand() % 10;
+		nemos[i].color2 /= 10;
+		nemos[i].color3 = rand() % 10;
+		nemos[i].color3 /= 10;
+
+		ch.x = 0;
+		ch.y = 0;
+		ch.active = 0;
 	}
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA); // 디스플레이 모드 설정 
@@ -53,6 +78,7 @@ void main(int argc, char *argv[])
 	glutDisplayFunc(drawScene); // 출력 함수의 지정 
 	glutTimerFunc(0, Timer, 1);
 	glutMouseFunc(Mouse);
+	glutMotionFunc(Motion);
 	glutReshapeFunc(Reshape);
 	glutMainLoop();
 }
@@ -63,9 +89,22 @@ GLvoid drawScene(GLvoid)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // 바탕색을 'blue' 로 지정 
 	glClear(GL_COLOR_BUFFER_BIT); // 설정된 색으로 전체를 칠하기 
 
-	glColor4f(1, 0, 0, 1.0f);
+	
 
-	glRectf(0, 0, 5, 5); // 사각형 그리기 
+	for (int i = 0; i < 100; i++)
+	{
+		if (nemos[i].active == 1)
+		{
+			glColor4f(nemos[i].color1, nemos[i].color2, nemos[i].color3, 1.0f);
+			glRectf(nemos[i].x, nemos[i].y, nemos[i].x + 15, nemos[i].y + 15);
+		}
+		if (ch.active == 1)
+		{
+			glColor4f(0, 0, 0, 1.0f);
+			glRectf(ch.x, ch.y, ch.x + 30, ch.y + 30);
+		}
+	}
+	
 
 	glFlush(); // 화면에 출력하기 
 }
