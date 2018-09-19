@@ -32,21 +32,24 @@ void Mouse(int button, int state, int x, int y)
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		ch.active = 1;
-		for (int i = 0; i < 100; i++)
-		{
-			if(ch.x < nemos[i].x + 15)
-		}
 	}
-	else if((button == GLUT_LEFT_BUTTON && state == GLUT_UP))
+	else if ((button == GLUT_LEFT_BUTTON && state == GLUT_UP))
 	{
 		ch.active = 0;
 	}
 }
 
-void Motion(int x, int y) 
+void Motion(int x, int y)
 {
 	ch.x = x;
-	ch.y = y; 
+	ch.y = y;
+	for (int i = 0; i < 100; i++)
+	{
+		if (ch.x < nemos[i].x + 15 && ch.x + 30 > nemos[i].x && ch.y < nemos[i].y + 15 && ch.y + 30 > nemos[i].y && ch.active)
+		{
+			nemos[i].active = 0;
+		}
+	}
 }
 
 
@@ -89,7 +92,7 @@ GLvoid drawScene(GLvoid)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // 바탕색을 'blue' 로 지정 
 	glClear(GL_COLOR_BUFFER_BIT); // 설정된 색으로 전체를 칠하기 
 
-	
+
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -104,7 +107,7 @@ GLvoid drawScene(GLvoid)
 			glRectf(ch.x, ch.y, ch.x + 30, ch.y + 30);
 		}
 	}
-	
+
 
 	glFlush(); // 화면에 출력하기 
 }
