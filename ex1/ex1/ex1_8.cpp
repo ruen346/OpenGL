@@ -30,7 +30,7 @@ void Mouse(int button, int state, int x, int y)
 	{
 		set_x[now] = x;
 		set_y[now] = y;
-		if (now < 10)
+		if (now < 9)
 			now++;
 		else
 			now = 0;

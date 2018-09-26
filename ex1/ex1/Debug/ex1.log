@@ -1,4 +1,9 @@
-﻿  소스.cpp
-c:\users\구건모\desktop\opengl-master\ex1\ex1\소스.cpp(106): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\opengl-master\ex1\ex1\소스.cpp(131): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  ex1_14.cpp
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(71): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(72): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(73): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(91): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(92): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(120): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\opengl-master\ex1\ex1\ex1_14.cpp(121): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ex1.vcxproj -> C:\Users\구건모\Desktop\OpenGL-master\ex1\Debug\ex1.exe
