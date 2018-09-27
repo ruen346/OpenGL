@@ -8,17 +8,25 @@ GLvoid Reshape(int w, int h);
 
 int times[6];
 
+int spin = 0;
+
 void one()
 {
 	glPushMatrix();
 	glTranslatef(80, -60, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, 20, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 }
@@ -27,30 +35,45 @@ void two()
 	glPushMatrix();
 	glTranslatef(40, -100, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, -60, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(40, -20, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0, 20, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(40, 60, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 }
@@ -59,30 +82,45 @@ void three()
 	glPushMatrix();
 	glTranslatef(40, -100, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, -60, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(40, -20, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, 20, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(40, 60, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 }
@@ -91,88 +129,336 @@ void four()
 	glPushMatrix();
 	glTranslatef(0, -60, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, -60, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(40, -20, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, 20, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 }
 void five()
 {
-
-}
-void six()
-{
-
-}
-void seven()
-{
-
-}
-void eight()
-{
-
-}
-void nine()
-{
-
-}
-void zero()
-{
 	glPushMatrix();
 	glTranslatef(40, -100, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
 	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0, -60, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
 	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(80, -60, 0);
-	glScalef(1, 3, 1);
+	glTranslatef(40, -20, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
 	glutSolidCube(20);
-	glutWireCube(20);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0, 20, 0);
-	glScalef(1, 3, 1);
-	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(80, 20, 0);
 	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
 	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(40, 60, 0);
 	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
 	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+}
+void six()
+{
+	glPushMatrix();
+	glTranslatef(0, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(40, -20, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(40, 60, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+}
+void seven()
+{
+	glPushMatrix();
+	glTranslatef(40, -100, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+}
+void eight()
+{
+	glPushMatrix();
+	glTranslatef(40, -100, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(40, -20, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(40, 60, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+}
+void nine()
+{
+	glPushMatrix();
+	glTranslatef(40, -100, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(40, -20, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+}
+void zero()
+{
+	glPushMatrix();
+	glTranslatef(40, -100, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, -60, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(80, 20, 0);
+	glScalef(1, 3, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
+	glutWireCube(20);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(40, 60, 0);
+	glScalef(3, 1, 1);
+	glColor3f(1, 1, 1);
+	glutSolidCube(20);
+	glColor3f(0, 0, 0);
 	glutWireCube(20);
 	glPopMatrix();
 }
@@ -198,7 +484,9 @@ void Keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-
+	case 'y':
+		spin += 5;
+		break;
 	}
 }
 
@@ -227,7 +515,7 @@ void main(int argc, char *argv[])
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(800, 600);
 
-	glutCreateWindow("ex1_11");
+	glutCreateWindow("ex1_15");
 	glutDisplayFunc(drawScene);
 	glutTimerFunc(0, Timer, 1);
 	glutKeyboardFunc(Keyboard);
@@ -242,16 +530,37 @@ GLvoid drawScene(GLvoid)
 	glPushMatrix();
 	glTranslatef(400, 300, 0.0);
 	glRotatef(30, 1.0, 1.0, 0.0);
+	glRotatef(spin, 0.0, 1.0, 0.0);
 
 	glClearColor(0, 0, 0, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 
-	glTranslatef(-300, 0, 0.0);
+	glTranslatef(-460, 0, 0.0);
 
 	for (int i = 0; i < 6; i++)
 	{
-		glTranslatef(100, 0, 0);
+		glTranslatef(115, 0, 0);
+		if (i == 2 || i == 4)
+		{
+			if (times[5] % 2 == 1)
+			{
+				glPushMatrix();
+				glTranslatef(0, -70, 0);
+				glColor3f(1, 1, 1);
+				glutSolidCube(20);
+				glColor3f(0, 0, 0);
+				glutWireCube(20);
+				glTranslatef(0, 95, 0);
+				glColor3f(1, 1, 1);
+				glutSolidCube(20);
+				glColor3f(0, 0, 0);
+				glutWireCube(20);
+				glPopMatrix();
+			}
+
+			glTranslatef(35, 0, 0);
+		}
 		switch (times[i])
 		{
 		case 0:
