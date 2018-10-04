@@ -121,18 +121,21 @@ GLvoid drawScene(GLvoid)
 		glRotatef(turn, 1.0, 1.0, 0.0);
 
 		glColor3f(nemo[i].color[0], nemo[i].color[1], nemo[i].color[2]);
-		switch (nemo[i].choose)
+
+		if (nemo[i].big > 1)
 		{
-		case 0:
-			glutWireCube(nemo[i].big); break;
-		case 1:
-			glutWireSphere(nemo[i].big, 10, 10); break;
-		case 2:
-			glutWireTorus(nemo[i].big, nemo[i].big + 20, 10, 10); break;
-		case 3:
-			glutWireTeapot(nemo[i].big); break;
+			switch (nemo[i].choose)
+			{
+			case 0:
+				glutWireCube(nemo[i].big); break;
+			case 1:
+				glutWireSphere(nemo[i].big, 10, 10); break;
+			case 2:
+				glutWireTorus(nemo[i].big, nemo[i].big + 20, 10, 10); break;
+			case 3:
+				glutWireTeapot(nemo[i].big); break;
+			}
 		}
-		
 
 		glPopMatrix();
 	}
