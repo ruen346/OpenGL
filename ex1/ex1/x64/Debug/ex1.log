@@ -1,1 +1,29 @@
-﻿LINK : fatal error LNK1104: 'freeglut.lib' 파일을 열 수 없습니다.
+﻿  ex1_17.cpp
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(17): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(77): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(121): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(123): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(127): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(134): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(136): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(154): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(156): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(160): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(176): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(178): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_17.cpp(182): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+ex1_17.obj : error LNK2019: __imp_glutInitWindowSize 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutInitDisplayMode 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutMainLoop 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutPostRedisplay 외부 기호(참조 위치: "void __cdecl Timer(int)" (?Timer@@YAXH@Z) 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutSwapBuffers 외부 기호(참조 위치: "void __cdecl drawScene(void)" (?drawScene@@YAXXZ) 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutTimerFunc 외부 기호(참조 위치: "void __cdecl Timer(int)" (?Timer@@YAXH@Z) 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutKeyboardFunc 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutReshapeFunc 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutDisplayFunc 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutMouseFunc 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp_glutMotionFunc 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp___glutInitWithExit 외부 기호(참조 위치: glutInit_ATEXIT_HACK 함수)에서 확인하지 못했습니다.
+ex1_17.obj : error LNK2019: __imp___glutCreateWindowWithExit 외부 기호(참조 위치: glutCreateWindow_ATEXIT_HACK 함수)에서 확인하지 못했습니다.
+C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\um\x64\freeglut.lib : warning LNK4272: 'x86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\rnrjs\Desktop\개발\OpenGL\ex1\x64\Debug\ex1.exe : fatal error LNK1120: 13개의 확인할 수 없는 외부 참조입니다.
