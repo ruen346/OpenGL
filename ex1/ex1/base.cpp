@@ -29,27 +29,27 @@ void Keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'x':
-		camera_rotation[0] += 0.01;
+		camera_rotation[0] += 0.02;
 		break;
 
 	case 'X':
-		camera_rotation[0] -= 0.01;
+		camera_rotation[0] -= 0.02;
 		break;
 
 	case 'y':
-		camera_rotation[1] += 0.01;
+		camera_rotation[1] += 0.02;
 		break;
 
 	case 'Y':
-		camera_rotation[1] -= 0.01;
+		camera_rotation[1] -= 0.02;
 		break;
 
 	case 'z':
-		camera_rotation[2] += 0.01;
+		camera_rotation[2] += 0.02;
 		break;
 
 	case 'Z':
-		camera_rotation[2] -= 0.01;
+		camera_rotation[2] -= 0.02;
 		break;
 
 	case 'w':

@@ -17,7 +17,6 @@ int select = 0;//1부터 도형
 void SetupRC()
 {
 	srand(time(NULL));
-
 }
 
 void Timer(int value)
@@ -264,16 +263,16 @@ void drawScene()
 		glColor3f(1, 1, 0);
 		glPushMatrix();
 		glTranslatef(-50, 0, 0);
-		glRotatef(-90, 1, 0.0, 0);
 		glRotatef(rotates_select[0], 0.0, 1.0, 0.0);
+		glRotatef(-90, 1, 0.0, 0);
 		gluCylinder(glu_fill, 30, 0.0, 30, 20, 8);
 		glPopMatrix();
 
 		glColor3f(1, 0, 1);
 		glPushMatrix();
 		glTranslatef(50, 0, 0);
-		glRotatef(-90, 1, 0.0, 0);
 		glRotatef(rotates_select[1], 0.0, 1.0, 0.0);
+		glRotatef(-90, 1, 0.0, 0);
 		gluCylinder(glu_line, 30, 0.0, 30, 20, 10);
 		glPopMatrix();
 		break;
