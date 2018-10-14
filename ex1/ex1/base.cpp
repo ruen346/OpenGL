@@ -9,12 +9,13 @@ GLvoid Reshape(int w, int h);
 GLUquadricObj *glu_fill;
 GLUquadricObj *glu_line;
 
-int ro[3];
+float camera_rotation[3];
 int moves[3];
 
 void SetupRC()
 {
 	srand(time(NULL));
+
 }
 
 void Timer(int value)
@@ -28,45 +29,27 @@ void Keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'x':
-		if (ro[0] < 355)
-			ro[0] += 5;
-		else
-			ro[0] = 0;
+		camera_rotation[0] += 0.01;
 		break;
 
 	case 'X':
-		if (ro[0] > 5)
-			ro[0] -= 5;
-		else
-			ro[0] = 360;
+		camera_rotation[0] -= 0.01;
 		break;
 
 	case 'y':
-		if (ro[1] < 355)
-			ro[1] += 5;
-		else
-			ro[1] = 0;
+		camera_rotation[1] += 0.01;
 		break;
 
 	case 'Y':
-		if (ro[1] > 5)
-			ro[1] -= 5;
-		else
-			ro[1] = 360;
+		camera_rotation[1] -= 0.01;
 		break;
 
 	case 'z':
-		if (ro[2] < 355)
-			ro[2] += 5;
-		else
-			ro[2] = 0;
+		camera_rotation[2] += 0.01;
 		break;
 
 	case 'Z':
-		if (ro[2] > 5)
-			ro[2] -= 5;
-		else
-			ro[2] = 360;
+		camera_rotation[2] -= 0.01;
 		break;
 
 	case 'w':
@@ -94,9 +77,9 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 
 	case 'i':
-		ro[0] = 0;
-		ro[1] = 0;
-		ro[2] = 0;
+		camera_rotation[0] = 0;
+		camera_rotation[1] = 0;
+		camera_rotation[2] = 0;
 		moves[0] = 0;
 		moves[1] = 0;
 		moves[2] = 0;
@@ -138,6 +121,13 @@ void main(int argc, char *argv[])
 
 void drawScene()
 {
+	GLdouble uu[16] = {
+	cos(camera_rotation[1])*cos(camera_rotation[2]),-cos(camera_rotation[1])*sin(camera_rotation[2]),sin(camera_rotation[1]),0,
+	(sin(camera_rotation[0])*sin(camera_rotation[1])*cos(camera_rotation[2])) + (cos(camera_rotation[0])*sin(camera_rotation[2])),(-sin(camera_rotation[0])*sin(camera_rotation[1])*sin(camera_rotation[2])) + (cos(camera_rotation[0])*cos(camera_rotation[2])),-sin(camera_rotation[0])*cos(camera_rotation[1]),0,
+	(-cos(camera_rotation[0])*sin(camera_rotation[1])*cos(camera_rotation[2])) + (sin(camera_rotation[0])*sin(camera_rotation[2])),(cos(camera_rotation[0])*sin(camera_rotation[1])*sin(camera_rotation[2])) + (sin(camera_rotation[0])*cos(camera_rotation[2])),cos(camera_rotation[0])*cos(camera_rotation[1]),0,
+	0,0,0,1
+	};
+
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -147,16 +137,23 @@ void drawScene()
 	gluQuadricDrawStyle(glu_line, GLU_LINE);
 
 	glPushMatrix();
-	glRotatef(ro[0], 1.0, 0.0, 0.0);
-	glRotatef(ro[1], 0.0, 1.0, 0.0);
-	glRotatef(ro[2], 0.0, 0.0, 1.0);
+	glLoadIdentity();
+	glLoadMatrixd(uu);
 	glTranslatef(moves[0], moves[1], moves[2]);
+
+	glPushMatrix();
+	gluLookAt(
+		0.0, 0.0, 0.0, //EYE
+		0.0, 0.0, 0.0, //AT
+		0.0, 1.0, 0.0); //UP
+	glMultMatrixd(uu);
+	glPopMatrix();
 
 
 	glPushMatrix();
 
 
-	glPopMatrix();
+
 
 
 	glPopMatrix();

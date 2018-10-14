@@ -9,9 +9,10 @@ GLvoid Reshape(int w, int h);
 GLUquadricObj *glu_fill;
 GLUquadricObj *glu_line;
 
-int turn[3];
-float ro[3];
+float camera_rotation[3];
 int moves[3];
+int rotates_select[2];
+int select = 0;//1부터 도형
 
 void SetupRC()
 {
@@ -21,13 +22,15 @@ void SetupRC()
 
 void Timer(int value)
 {
-	if (turn[0] < 359 * 3)
-		turn[0]++;
+	if (rotates_select[0] < 355)
+		rotates_select[0] += 5;
 	else
-		turn[0] = 0;
+		rotates_select[0] = 0;
 
-	turn[1] = turn[0] * 2 / 3;
-	turn[2] = turn[0] / 3;
+	if (rotates_select[1] < 355)
+		rotates_select[1] += 5;
+	else
+		rotates_select[1] = 0;
 
 	glutPostRedisplay();
 	glutTimerFunc(20, Timer, 1);
@@ -38,27 +41,27 @@ void Keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'x':
-		ro[0] += 0.01;
+		camera_rotation[0] += 0.01;
 		break;
 
 	case 'X':
-		ro[0] -= 0.01;
+		camera_rotation[0] -= 0.01;
 		break;
 
 	case 'y':
-		ro[1] += 0.01;
+		camera_rotation[1] += 0.01;
 		break;
 
 	case 'Y':
-		ro[1] -= 0.01;
+		camera_rotation[1] -= 0.01;
 		break;
 
 	case 'z':
-		ro[2] += 0.01;
+		camera_rotation[2] += 0.01;
 		break;
 
 	case 'Z':
-		ro[2] -= 0.01;
+		camera_rotation[2] -= 0.01;
 		break;
 
 	case 'w':
@@ -86,12 +89,42 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 
 	case 'i':
-		ro[0] = 0;
-		ro[1] = 0;
-		ro[2] = 0;
+		camera_rotation[0] = 0;
+		camera_rotation[1] = 0;
+		camera_rotation[2] = 0;
 		moves[0] = 0;
 		moves[1] = 0;
 		moves[2] = 0;
+		break;
+
+	case 'l':
+		rotates_select[0] += 10;
+		break;
+
+	case 'r':
+		rotates_select[1] += 10;
+		break;
+
+	case 'o':
+		rotates_select[0] += 10;
+		rotates_select[1] += 10;
+		break;
+
+
+	case '1':
+		select = 1;
+		break;
+
+	case '2':
+		select = 2;
+		break;
+
+	case '3':
+		select = 3;
+		break;
+
+	case '4':
+		select = 4;
 		break;
 	}
 }
@@ -131,9 +164,9 @@ void main(int argc, char *argv[])
 void drawScene()
 {
 	GLdouble uu[16] = {
-	cos(ro[1])*cos(ro[2]),-cos(ro[1])*sin(ro[2]),sin(ro[1]),0,
-	(sin(ro[0])*sin(ro[1])*cos(ro[2])) + (cos(ro[0])*sin(ro[2])),(-sin(ro[0])*sin(ro[1])*sin(ro[2])) + (cos(ro[0])*cos(ro[2])),-sin(ro[0])*cos(ro[1]),0,
-	(-cos(ro[0])*sin(ro[1])*cos(ro[2])) + (sin(ro[0])*sin(ro[2])),(cos(ro[0])*sin(ro[1])*sin(ro[2])) + (sin(ro[0])*cos(ro[2])),cos(ro[0])*cos(ro[1]),0,
+	cos(camera_rotation[1])*cos(camera_rotation[2]),-cos(camera_rotation[1])*sin(camera_rotation[2]),sin(camera_rotation[1]),0,
+	(sin(camera_rotation[0])*sin(camera_rotation[1])*cos(camera_rotation[2])) + (cos(camera_rotation[0])*sin(camera_rotation[2])),(-sin(camera_rotation[0])*sin(camera_rotation[1])*sin(camera_rotation[2])) + (cos(camera_rotation[0])*cos(camera_rotation[2])),-sin(camera_rotation[0])*cos(camera_rotation[1]),0,
+	(-cos(camera_rotation[0])*sin(camera_rotation[1])*cos(camera_rotation[2])) + (sin(camera_rotation[0])*sin(camera_rotation[2])),(cos(camera_rotation[0])*sin(camera_rotation[1])*sin(camera_rotation[2])) + (sin(camera_rotation[0])*cos(camera_rotation[2])),cos(camera_rotation[0])*cos(camera_rotation[1]),0,
 	0,0,0,1
 	};
 
@@ -153,113 +186,114 @@ void drawScene()
 	glPushMatrix();
 	gluLookAt(
 		0.0, 0.0, 0.0, //EYE
-		0.0, 0.0, 0.0, //AT
+		0.0, 0.0, -1.0, //AT
 		0.0, 1.0, 0.0); //UP
 	glMultMatrixd(uu);
 	glPopMatrix();
 
+
+	glPushMatrix();
+
+	
+	glLineWidth(5);
+	glBegin(GL_LINES);
+
+	glColor3f(1, 0, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(30, 0, 0);
+
+	glColor3f(0, 1, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 30, 0);
+
 	glColor3f(0, 0, 1);
-	gluSphere(glu_fill, 30, 30, 30);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, 30);
+
+	glEnd();
+	glLineWidth(1);
 
 
 	glPushMatrix();
 
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_LINES);
-	float rad = 120;
-	float angle;
-	for (int i = 0; i < 359; i++)
-	{
-		angle = i * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-		angle = (i + 1) * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-	}
-	glEnd();
-	glTranslatef(rad*cos(turn[0] * 3.14 / 180), 0, rad*sin(turn[0] * 3.14 / 180));
-	gluSphere(glu_fill, 15, 15, 15);
-
-	glBegin(GL_LINES);
-	rad = 60;
-	for (int i = 0; i < 359; i++)
-	{
-		angle = i * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-		angle = (i + 1) * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-	}
-	glEnd();
-	glTranslatef(rad*cos(turn[0] * 3.14 / 180), 0, rad*sin(turn[0] * 3.14 / 180));
-	gluSphere(glu_fill, 8, 8, 8);
+	glTranslatef(0, -100, 0);
+	glScalef(300, 1, 300);
+	glColor3f(1, 1, 1);
+	glutSolidCube(1);
 
 	glPopMatrix();
 
 
 	glPushMatrix();
-
-	glRotatef(45, 0.0, 0.0, 1.0);
-
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_LINES);
-	rad = 120;
-	for (int i = 0; i < 359; i++)
+	glTranslatef(0, -50, 0);
+	switch (select)
 	{
-		angle = i * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-		angle = (i + 1) * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+	case 1:
+		glColor3f(1, 1, 0);
+		glPushMatrix();
+		glTranslatef(-50, 0, 0);
+		glRotatef(rotates_select[0], 0.0, 1.0, 0.0);
+		gluSphere(glu_fill, 30, 30, 30);
+		glPopMatrix();
+
+		glColor3f(1, 0, 1);
+		glPushMatrix();
+		glTranslatef(50, 0, 0);
+		glRotatef(rotates_select[1], 0.0, 1.0, 0.0);
+		gluSphere(glu_line, 30, 30, 30);
+		glPopMatrix();
+		break;
+
+	case 2:
+		glColor3f(1, 1, 0);
+		glPushMatrix();
+		glTranslatef(-50, 0, 0);
+		glRotatef(rotates_select[0], 0.0, 1.0, 0.0);
+		glutSolidCube(30);
+		glPopMatrix();
+
+		glColor3f(1, 0, 1);
+		glPushMatrix();
+		glTranslatef(50, 0, 0);
+		glRotatef(rotates_select[1], 0.0, 1.0, 0.0);
+		glutWireCube(30);
+		glPopMatrix();
+		break;
+
+	case 3:
+		glColor3f(1, 1, 0);
+		glPushMatrix();
+		glTranslatef(-50, 0, 0);
+		glRotatef(-90, 1, 0.0, 0);
+		glRotatef(rotates_select[0], 0.0, 1.0, 0.0);
+		gluCylinder(glu_fill, 30, 0.0, 30, 20, 8);
+		glPopMatrix();
+
+		glColor3f(1, 0, 1);
+		glPushMatrix();
+		glTranslatef(50, 0, 0);
+		glRotatef(-90, 1, 0.0, 0);
+		glRotatef(rotates_select[1], 0.0, 1.0, 0.0);
+		gluCylinder(glu_line, 30, 0.0, 30, 20, 10);
+		glPopMatrix();
+		break;
+
+	case 4:
+		glColor3f(1, 1, 0);
+		glPushMatrix();
+		glTranslatef(-50, 0, 0);
+		glRotatef(rotates_select[0], 0.0, 1.0, 0.0);
+		glutSolidTeapot(30);
+		glPopMatrix();
+
+		glColor3f(1, 0, 1);
+		glPushMatrix();
+		glTranslatef(50, 0, 0);
+		glRotatef(rotates_select[1], 0.0, 1.0, 0.0);
+		glutWireTeapot(30);
+		glPopMatrix();
+		break;
 	}
-	glEnd();
-	glTranslatef(rad*cos(turn[1] * 3.14 / 180), 0, rad*sin(turn[1] * 3.14 / 180));
-	gluSphere(glu_fill, 15, 15, 15);
-
-	glBegin(GL_LINES);
-	rad = 60;
-	for (int i = 0; i < 359; i++)
-	{
-		angle = i * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-		angle = (i + 1) * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-	}
-	glEnd();
-	glTranslatef(rad*cos(turn[1] * 3.14 / 180), 0, rad*sin(turn[1] * 3.14 / 180));
-	gluSphere(glu_fill, 8, 8, 8);
-
-	glPopMatrix();
-
-
-	glPushMatrix();
-
-	glRotatef(-45, 0.0, 0.0, 1.0);
-
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_LINES);
-	rad = 120;
-	for (int i = 0; i < 359; i++)
-	{
-		angle = i * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-		angle = (i + 1) * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-	}
-	glEnd();
-	glTranslatef(rad*cos(turn[2] * 3.14 / 180), 0, rad*sin(turn[2] * 3.14 / 180));
-	gluSphere(glu_fill, 15, 15, 15);
-
-	glBegin(GL_LINES);
-	rad = 60;
-	for (int i = 0; i < 359; i++)
-	{
-		angle = i * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-		angle = (i + 1) * 3.14 / 180;
-		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
-	}
-	glEnd();
-	glTranslatef(rad*cos(turn[2] * 3.14 / 180), 0, rad*sin(turn[2] * 3.14 / 180));
-	gluSphere(glu_fill, 8, 8, 8);
-
 	glPopMatrix();
 
 
