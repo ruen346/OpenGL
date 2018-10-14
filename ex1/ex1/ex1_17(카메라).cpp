@@ -11,6 +11,7 @@ GLUquadricObj *glu_line;
 
 int turn[3];
 float ro[3];
+int moves[3];
 
 void SetupRC()
 {
@@ -40,12 +41,57 @@ void Keyboard(unsigned char key, int x, int y)
 		ro[0] += 0.01;
 		break;
 
+	case 'X':
+		ro[0] -= 0.01;
+		break;
+
 	case 'y':
 		ro[1] += 0.01;
 		break;
 
+	case 'Y':
+		ro[1] -= 0.01;
+		break;
+
 	case 'z':
 		ro[2] += 0.01;
+		break;
+
+	case 'Z':
+		ro[2] -= 0.01;
+		break;
+
+	case 'w':
+		moves[1] -= 5;
+		break;
+
+	case 'a':
+		moves[0] -= 5;
+		break;
+
+	case 's':
+		moves[1] += 5;
+		break;
+
+	case 'd':
+		moves[0] += 5;
+		break;
+
+	case '+':
+		moves[2] += 5;
+		break;
+
+	case '-':
+		moves[2] -= 5;
+		break;
+
+	case 'i':
+		ro[0] = 0;
+		ro[1] = 0;
+		ro[2] = 0;
+		moves[0] = 0;
+		moves[1] = 0;
+		moves[2] = 0;
 		break;
 	}
 }
@@ -84,29 +130,12 @@ void main(int argc, char *argv[])
 
 void drawScene()
 {
-	GLdouble xx[16] = {
-	1,0,0,0,
-	0,cos(ro[0]),-sin(ro[0]),0,
-	0,sin(ro[0]),cos(ro[0]),0,
+	GLdouble uu[16] = {
+	cos(ro[1])*cos(ro[2]),-cos(ro[1])*sin(ro[2]),sin(ro[1]),0,
+	(sin(ro[0])*sin(ro[1])*cos(ro[2])) + (cos(ro[0])*sin(ro[2])),(-sin(ro[0])*sin(ro[1])*sin(ro[2])) + (cos(ro[0])*cos(ro[2])),-sin(ro[0])*cos(ro[1]),0,
+	(-cos(ro[0])*sin(ro[1])*cos(ro[2])) + (sin(ro[0])*sin(ro[2])),(cos(ro[0])*sin(ro[1])*sin(ro[2])) + (sin(ro[0])*cos(ro[2])),cos(ro[0])*cos(ro[1]),0,
 	0,0,0,1
 	};
-	GLdouble yy[16] = {
-	cos(ro[1]),0,sin(ro[1]),0,
-	0,1,0,0,
-	-sin(ro[1]),0,cos(ro[1]),0,
-	0,0,0,1
-	};
-	GLdouble zz[16] = {
-	cos(ro[2]),-sin(ro[2]),0,0,
-	sin(ro[2]),cos(ro[2]),0,0,
-	0,0,1,0,
-	0,0,0,1
-	};
-
-	GLdouble uu[16];
-	for (int i = 0; i < 16; i++)
-		uu[i] = xx[i] + yy[i] + zz[i];
-
 
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -119,20 +148,16 @@ void drawScene()
 	glPushMatrix();
 	glLoadIdentity();
 	glLoadMatrixd(uu);
-	//glLoadMatrixd(yy);
-	//glLoadMatrixd(zz);
+	glTranslatef(moves[0], moves[1], moves[2]);
 
 	glPushMatrix();
 	gluLookAt(
-		1.0, 1.0, 1.0, //EYE
+		0.0, 0.0, 0.0, //EYE
 		0.0, 0.0, 0.0, //AT
 		0.0, 1.0, 0.0); //UP
 	glMultMatrixd(uu);
-	//glMultMatrixd(yy);
-	//glMultMatrixd(zz);
 	glPopMatrix();
 
-	//glRotatef(10, 1.0, 0.0, 0.0);
 	glColor3f(0, 0, 1);
 	gluSphere(glu_fill, 30, 30, 30);
 
@@ -154,6 +179,19 @@ void drawScene()
 	glTranslatef(rad*cos(turn[0] * 3.14 / 180), 0, rad*sin(turn[0] * 3.14 / 180));
 	gluSphere(glu_fill, 15, 15, 15);
 
+	glBegin(GL_LINES);
+	rad = 60;
+	for (int i = 0; i < 359; i++)
+	{
+		angle = i * 3.14 / 180;
+		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+		angle = (i + 1) * 3.14 / 180;
+		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+	}
+	glEnd();
+	glTranslatef(rad*cos(turn[0] * 3.14 / 180), 0, rad*sin(turn[0] * 3.14 / 180));
+	gluSphere(glu_fill, 8, 8, 8);
+
 	glPopMatrix();
 
 
@@ -163,10 +201,9 @@ void drawScene()
 
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_LINES);
+	rad = 120;
 	for (int i = 0; i < 359; i++)
 	{
-		float rad = 120;
-		float angle;
 		angle = i * 3.14 / 180;
 		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
 		angle = (i + 1) * 3.14 / 180;
@@ -175,6 +212,19 @@ void drawScene()
 	glEnd();
 	glTranslatef(rad*cos(turn[1] * 3.14 / 180), 0, rad*sin(turn[1] * 3.14 / 180));
 	gluSphere(glu_fill, 15, 15, 15);
+
+	glBegin(GL_LINES);
+	rad = 60;
+	for (int i = 0; i < 359; i++)
+	{
+		angle = i * 3.14 / 180;
+		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+		angle = (i + 1) * 3.14 / 180;
+		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+	}
+	glEnd();
+	glTranslatef(rad*cos(turn[1] * 3.14 / 180), 0, rad*sin(turn[1] * 3.14 / 180));
+	gluSphere(glu_fill, 8, 8, 8);
 
 	glPopMatrix();
 
@@ -185,10 +235,9 @@ void drawScene()
 
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_LINES);
+	rad = 120;
 	for (int i = 0; i < 359; i++)
 	{
-		float rad = 120;
-		float angle;
 		angle = i * 3.14 / 180;
 		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
 		angle = (i + 1) * 3.14 / 180;
@@ -197,6 +246,19 @@ void drawScene()
 	glEnd();
 	glTranslatef(rad*cos(turn[2] * 3.14 / 180), 0, rad*sin(turn[2] * 3.14 / 180));
 	gluSphere(glu_fill, 15, 15, 15);
+
+	glBegin(GL_LINES);
+	rad = 60;
+	for (int i = 0; i < 359; i++)
+	{
+		angle = i * 3.14 / 180;
+		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+		angle = (i + 1) * 3.14 / 180;
+		glVertex3f(rad*cos(angle), 0, rad*sin(angle));
+	}
+	glEnd();
+	glTranslatef(rad*cos(turn[2] * 3.14 / 180), 0, rad*sin(turn[2] * 3.14 / 180));
+	gluSphere(glu_fill, 8, 8, 8);
 
 	glPopMatrix();
 
