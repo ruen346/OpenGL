@@ -115,7 +115,8 @@ void main(int argc, char *argv[])
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(Mouse);
 	glutMotionFunc(Motion);
-	glutReshapeFunc(Reshape);
+	glut
+		Func(Reshape);
 	glutMainLoop();
 }
 

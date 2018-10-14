@@ -12,6 +12,7 @@ GLUquadricObj *glu_line;
 int turn[3];
 float ro[3];
 int moves[3];
+int mode = 0;
 
 void SetupRC()
 {
@@ -93,6 +94,14 @@ void Keyboard(unsigned char key, int x, int y)
 		moves[1] = 0;
 		moves[2] = 0;
 		break;
+
+	case 'm':
+		if (mode == 1)
+			mode = 0;
+		else
+			mode = 1;
+		glutReshapeFunc(Reshape);
+		break;
 	}
 }
 
@@ -124,7 +133,8 @@ void main(int argc, char *argv[])
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(Mouse);
 	glutMotionFunc(Motion);
-	glutReshapeFunc(Reshape);
+	glut
+		Func(Reshape);
 	glutMainLoop();
 }
 
@@ -270,13 +280,21 @@ void drawScene()
 void Reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, 1.0, 1.0, 600.0);
-	glTranslatef(0.0, 0.0, -300.0);
+
+	if (mode == 0)
+	{
+		gluPerspective(60.0, 1.0, 1.0, 600.0);
+		glTranslatef(0.0, 0.0, -300.0);
+
+		gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+	}
+	else
+	{
+		glOrtho(-400, 400, -300, 300, -400, 400);
+	}
 
 	glMatrixMode(GL_MODELVIEW);
-
-	gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+	glLoadIdentity();
 }

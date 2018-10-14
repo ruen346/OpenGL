@@ -13,6 +13,7 @@ float camera_rotation[3];
 int moves[3];
 int rotates_select[2];
 int select = 0;//1부터 도형
+int mode = 1;
 
 void SetupRC()
 {
@@ -125,6 +126,20 @@ void Keyboard(unsigned char key, int x, int y)
 	case '4':
 		select = 4;
 		break;
+
+	case 'm':
+		if (mode == 1)
+		{
+			mode = 0;
+			Reshape(800, 800);
+		}
+		else
+		{
+			mode = 1;
+			Reshape(800, 600);
+		}
+		glutReshapeFunc(Reshape);
+		break;
 	}
 }
 
@@ -145,7 +160,9 @@ void Motion(int x, int y)
 void main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
+	
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+	
 	glutInitWindowSize(800, 800);
 	glutCreateWindow("Points Drawing");
 
@@ -172,23 +189,30 @@ void drawScene()
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+
 	glu_fill = gluNewQuadric();
 	glu_line = gluNewQuadric();
 	gluQuadricDrawStyle(glu_fill, GLU_FILL);
 	gluQuadricDrawStyle(glu_line, GLU_LINE);
 
-	glPushMatrix();
-	glLoadIdentity();
-	glLoadMatrixd(uu);
-	glTranslatef(moves[0], moves[1], moves[2]);
+	//glPushMatrix();
+	if (mode == 0)
+	{
+		glLoadIdentity();
+		glLoadMatrixd(uu);
+		glTranslatef(moves[0], moves[1], moves[2]);
 
-	glPushMatrix();
-	gluLookAt(
-		0.0, 0.0, 0.0, //EYE
-		0.0, 0.0, -1.0, //AT
-		0.0, 1.0, 0.0); //UP
-	glMultMatrixd(uu);
-	glPopMatrix();
+		glPushMatrix();
+		gluLookAt(
+			0.0, 0.0, 0.0, //EYE
+			0.0, 0.0, -1.0, //AT
+			0.0, 1.0, 0.0); //UP
+		glMultMatrixd(uu);
+		glPopMatrix();
+	}
+	else
+		glTranslatef(moves[0], moves[1], moves[2]);
 
 
 	glPushMatrix();
@@ -303,13 +327,21 @@ void drawScene()
 void Reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, 1.0, 1.0, 600.0);
-	glTranslatef(0.0, 0.0, -300.0);
+
+	if (mode == 0)
+	{
+		gluPerspective(60.0, 1.0, 1.0, 600.0);
+		glTranslatef(0.0, 0.0, -300.0);
+
+		gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+	}
+	else
+	{
+		glOrtho(-400, 400, -300, 300, -400, 400);
+	}
 
 	glMatrixMode(GL_MODELVIEW);
-
-	gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+	glLoadIdentity();
 }
