@@ -11,7 +11,7 @@ GLUquadricObj *glu_line;
 
 int turn[3];
 float ro[3];
-int moves[3];
+float moves[3];
 int mode = 0;
 
 void SetupRC()
@@ -159,18 +159,18 @@ void drawScene()
 	gluQuadricDrawStyle(glu_fill, GLU_FILL);
 	gluQuadricDrawStyle(glu_line, GLU_LINE);
 
-	glPushMatrix();
+
 	glLoadIdentity();
 	glLoadMatrixd(uu);
-	glTranslatef(moves[0], moves[1], moves[2]);
+	//glTranslatef(moves[0], moves[1], moves[2]);
 
-	glPushMatrix();
+	//glPushMatrix();
 	gluLookAt(
-		0.0, 0.0, 0.0, //EYE
-		0.0, 0.0, 0.0, //AT
+		moves[0], moves[1], moves[2], //EYE
+		0.0, 0.0, -300.0, //AT
 		0.0, 1.0, 0.0); //UP
 	glMultMatrixd(uu);
-	glPopMatrix();
+	//glPopMatrix();
 
 	glColor3f(0, 0, 1);
 	gluSphere(glu_fill, 30, 30, 30);
@@ -289,10 +289,10 @@ void Reshape(int w, int h)
 
 	if (mode == 0)
 	{
-		gluPerspective(60.0, 1.0, 1.0, 600.0);
-		glTranslatef(0.0, 0.0, -300.0);
+		gluPerspective(60.0, 1.0, 1.0, 1000.0);
 
-		//gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+		gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -300.0, 0.0, 1.0, 0.0);
+		glTranslatef(0.0, 0.0, -300.0);
 	}
 	else
 	{
