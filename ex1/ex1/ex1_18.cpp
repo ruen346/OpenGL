@@ -201,15 +201,15 @@ void drawScene()
 	{
 		glLoadIdentity();
 		glLoadMatrixd(uu);
-		glTranslatef(moves[0], moves[1], moves[2]);
+		glTranslatef(moves[0], moves[1], 0);
 
-		glPushMatrix();
+		//glPushMatrix();
 		gluLookAt(
-			0.0, 0.0, 0.0, //EYE
+			0.0, 0.0, moves[2], //EYE
 			0.0, 0.0, -1.0, //AT
 			0.0, 1.0, 0.0); //UP
 		glMultMatrixd(uu);
-		glPopMatrix();
+		//glPopMatrix();
 	}
 	else
 		glTranslatef(moves[0], moves[1], moves[2]);

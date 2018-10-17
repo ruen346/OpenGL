@@ -17,7 +17,6 @@ int mode = 0;
 void SetupRC()
 {
 	srand(time(NULL));
-
 }
 
 void Timer(int value)
@@ -97,9 +96,15 @@ void Keyboard(unsigned char key, int x, int y)
 
 	case 'm':
 		if (mode == 1)
+		{
 			mode = 0;
+			Reshape(800, 800);
+		}
 		else
+		{
 			mode = 1;
+			Reshape(800, 600);
+		}
 		glutReshapeFunc(Reshape);
 		break;
 	}
@@ -133,8 +138,7 @@ void main(int argc, char *argv[])
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(Mouse);
 	glutMotionFunc(Motion);
-	glut
-		Func(Reshape);
+	glutReshapeFunc(Reshape);
 	glutMainLoop();
 }
 
@@ -288,7 +292,7 @@ void Reshape(int w, int h)
 		gluPerspective(60.0, 1.0, 1.0, 600.0);
 		glTranslatef(0.0, 0.0, -300.0);
 
-		gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+		//gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
 	}
 	else
 	{
