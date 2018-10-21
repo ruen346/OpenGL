@@ -201,7 +201,7 @@ void drawScene()
 		glPushMatrix();//°ø
 		{
 			glTranslatef(ball[0], 0, ball[2]);
-			glRotatef(ball_ro[0] * 360 / (60 * 3.141592), 0, 0, 1);
+			glRotatef(ball_ro[0] * -360 / (60 * 3.141592), 0, 0, 1);
 			glRotatef(ball_ro[2] * 360 / (60 * 3.141592), 1, 0, 0);
 			glRotatef(ball_ro[1] * 360 / (60 * 3.141592), 0, 1, 0);
 			glColor3f(0, 0, 1);
