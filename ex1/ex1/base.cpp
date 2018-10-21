@@ -70,10 +70,12 @@ void Keyboard(unsigned char key, int x, int y)
 
 	case '+':
 		moves[2] += 5;
+		Reshape(800, 800);
 		break;
 
 	case '-':
 		moves[2] -= 5;
+		Reshape(800, 800);
 		break;
 
 	case 'i':
@@ -115,8 +117,7 @@ void main(int argc, char *argv[])
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(Mouse);
 	glutMotionFunc(Motion);
-	glut
-		Func(Reshape);
+	glutReshapeFunc(Reshape);
 	glutMainLoop();
 }
 
@@ -140,22 +141,19 @@ void drawScene()
 	glPushMatrix();
 	glLoadIdentity();
 	glLoadMatrixd(uu);
-	glTranslatef(moves[0], moves[1], moves[2]);
 
-	glPushMatrix();
 	gluLookAt(
-		0.0, 0.0, 0.0, //EYE
-		0.0, 0.0, 0.0, //AT
+		moves[0], moves[1], 0.0, //EYE
+		0.0, 0.0, -300.0, //AT
 		0.0, 1.0, 0.0); //UP
 	glMultMatrixd(uu);
-	glPopMatrix();
-
 
 	glPushMatrix();
-
-
-
-
+	{
+		glColor3f(0, 0, 1);
+		gluSphere(glu_fill, 80, 100, 100);
+	}
+	glPopMatrix();
 
 	glPopMatrix();
 	glutSwapBuffers();
@@ -167,10 +165,13 @@ void Reshape(int w, int h)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, 1.0, 1.0, 600.0);
+	gluPerspective(60.0 - moves[2], 1.0, 1.0, 600.0);
 	glTranslatef(0.0, 0.0, -300.0);
 
 	glMatrixMode(GL_MODELVIEW);
 
-	gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0);
+	gluLookAt(
+		moves[0], moves[1], 0.0,
+		0.0, 0.0, -300.0, 
+		0.0, 1.0, 0.0);
 }

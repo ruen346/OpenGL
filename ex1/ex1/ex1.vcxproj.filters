@@ -75,5 +75,11 @@
     <ClCompile Include="ex1_18.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ex1_19.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ex1_20.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -196,17 +196,17 @@ void drawScene()
 	gluQuadricDrawStyle(glu_fill, GLU_FILL);
 	gluQuadricDrawStyle(glu_line, GLU_LINE);
 
-	//glPushMatrix();
+	glPushMatrix();
 	if (mode == 0)
 	{
 		glLoadIdentity();
 		glLoadMatrixd(uu);
-		glTranslatef(moves[0], moves[1], 0);
+		//glTranslatef(moves[0], moves[1], 0);
 
 		//glPushMatrix();
 		gluLookAt(
-			0.0, 0.0, moves[2], //EYE
-			0.0, 0.0, -1.0, //AT
+			moves[0], moves[1], moves[2], //EYE
+			0.0, 0.0, -300.0, //AT
 			0.0, 1.0, 0.0); //UP
 		glMultMatrixd(uu);
 		//glPopMatrix();

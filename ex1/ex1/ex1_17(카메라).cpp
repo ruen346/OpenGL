@@ -159,18 +159,21 @@ void drawScene()
 	gluQuadricDrawStyle(glu_fill, GLU_FILL);
 	gluQuadricDrawStyle(glu_line, GLU_LINE);
 
+	//glTranslatef(moves[0], moves[1], moves[2]);
+
+	glPushMatrix();	
 
 	glLoadIdentity();
 	glLoadMatrixd(uu);
-	//glTranslatef(moves[0], moves[1], moves[2]);
+	glMultMatrixd(uu);
 
-	//glPushMatrix();
 	gluLookAt(
 		moves[0], moves[1], moves[2], //EYE
 		0.0, 0.0, -300.0, //AT
 		0.0, 1.0, 0.0); //UP
-	glMultMatrixd(uu);
 	//glPopMatrix();
+
+
 
 	glColor3f(0, 0, 1);
 	gluSphere(glu_fill, 30, 30, 30);
@@ -191,7 +194,7 @@ void drawScene()
 	}
 	glEnd();
 	glTranslatef(rad*cos(turn[0] * 3.14 / 180), 0, rad*sin(turn[0] * 3.14 / 180));
-	gluSphere(glu_fill, 15, 15, 15);
+	gluSphere(glu_fill, 15, 30, 30);
 
 	glBegin(GL_LINES);
 	rad = 60;
