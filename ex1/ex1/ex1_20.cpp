@@ -181,7 +181,7 @@ void drawScene()
 		{
 			glTranslatef(d[0], d[1], d[2]);
 			glPushMatrix();//го╨н
-			{
+			{	
 				glColor3f(1, 0, 0);
 				glScalef(2, 1, 2);
 				glutSolidCube(30);
