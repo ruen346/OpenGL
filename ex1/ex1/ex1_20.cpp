@@ -71,6 +71,7 @@ void Keyboard(unsigned char key, int x, int y)
 		camera_rotation[2] -= 0.02;
 		break;
 
+	/*
 	case 'w':
 		moves[1] -= 5;
 		break;
@@ -86,6 +87,7 @@ void Keyboard(unsigned char key, int x, int y)
 	case 'd':
 		moves[0] += 5;
 		break;
+	*/
 
 	case '+':
 		moves[2] += 5;
@@ -104,6 +106,41 @@ void Keyboard(unsigned char key, int x, int y)
 		moves[0] = 0;
 		moves[1] = 0;
 		moves[2] = 0;
+		break;
+	
+	case 'q':
+		d_ro[1] += 10;
+		break;
+	case 'Q':
+		d_ro[1] -= 10;
+		break;
+
+	case 'w':
+		m_ro[0] += 10;
+		break;
+	case 'W':
+		m_ro[0] -= 10;
+		break;
+	
+	case 'e':
+		m_ro[2] += 10;
+		break;
+	case 'E':
+		m_ro[2] -= 10;
+		break;
+
+	case 'r':
+		u_ro[0] += 10;
+		break;
+	case 'R':
+		u_ro[0] -= 10;
+		break;
+
+	case 't':
+		u_ro[2] += 10;
+		break;
+	case 'T':
+		u_ro[2] -= 10;
 		break;
 	}
 }
@@ -180,19 +217,42 @@ void drawScene()
 		glPushMatrix();//하중상부
 		{
 			glTranslatef(d[0], d[1], d[2]);
+			glRotatef(d_ro[1], 0, 1, 0);
 			glPushMatrix();//하부
 			{	
 				glColor3f(1, 0, 0);
 				glScalef(2, 1, 2);
 				glutSolidCube(30);
 			}
+			glPopMatrix();
+
+			glTranslatef(0, 15, 0);
+			glRotatef(m_ro[0], 1, 0, 0);
+			glRotatef(m_ro[2], 0, 0, 1);
+			glTranslatef(0, -15, 0);
+
 			glPushMatrix();//중부
 			{
-				glTranslatef(0, 35, 0);
+				glTranslatef(0, 25, 0);
 				glColor3f(0, 1, 0);
-				glScalef(1, 4, 1);
+				glScalef(1, 2, 1);
 				glutSolidCube(10);
 			}
+			glPopMatrix();
+
+			glTranslatef(0, 30, 0);
+			glRotatef(u_ro[0], 1, 0, 0);
+			glRotatef(u_ro[2], 0, 0, 1);
+			glTranslatef(0, -30, 0);
+
+			glPushMatrix();//하부
+			{
+				glTranslatef(0, 40, 0);
+				glColor3f(0, 0, 1);
+				glScalef(1, 2, 1);
+				glutSolidCube(5);
+			}
+			glPopMatrix();
 		}
 		glPopMatrix();
 	}
