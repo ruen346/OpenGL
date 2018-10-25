@@ -228,7 +228,7 @@ void drawScene()
 
 			glTranslatef(0, 15, 0);
 			glRotatef(m_ro[0], 1, 0, 0);
-			glRotatef(m_ro[2], 0, 0, 1);
+			glRotatef(m_ro[2], 0, 1, 0);
 			glTranslatef(0, -15, 0);
 
 			glPushMatrix();//중부
@@ -242,7 +242,7 @@ void drawScene()
 
 			glTranslatef(0, 30, 0);
 			glRotatef(u_ro[0], 1, 0, 0);
-			glRotatef(u_ro[2], 0, 0, 1);
+			glRotatef(u_ro[2], 0, 1, 0);
 			glTranslatef(0, -30, 0);
 
 			glPushMatrix();//하부
