@@ -21,6 +21,9 @@ int hand_sw = 0;
 
 int run_ro = 0;
 
+int leg_ro[2];
+int leg_sw[2];
+
 void SetupRC()
 {
 
@@ -60,6 +63,36 @@ void Timer(int value)
 	else
 		run_ro = 0;
 
+	if (hand_sw == 0 && hand_up < 30)
+		hand_up++;
+	else if (hand_up == 30)
+		hand_sw = 1;
+
+	if (hand_sw == 1 && hand_up > 0)
+		hand_up--;
+	else if (hand_up == 0)
+		hand_sw = 0;
+
+
+	if (leg_sw[0] == 0 && leg_ro[0] < 45)
+		leg_ro[0]+=5;
+	else if (leg_ro[0] == 45)
+		leg_sw[0] = 1;
+
+	if (leg_sw[0] == 1 && leg_ro[0] > -45)
+		leg_ro[0]-=5;
+	else if (leg_ro[0] == -45)
+		leg_sw[0] = 0;
+
+	if (leg_sw[1] == 1 && leg_ro[1] < 45)
+		leg_ro[1]+=5;
+	else if (leg_ro[1] == 45)
+		leg_sw[1] = 0;
+
+	if (leg_sw[1] == 0 && leg_ro[1] > -45)
+		leg_ro[1]-=5;
+	else if (leg_ro[1] == -45)
+		leg_sw[1] = 1;
 
 	glutPostRedisplay();
 	glutTimerFunc(20, Timer, 1);
@@ -310,12 +343,12 @@ void drawScene()
 
 				glPushMatrix();//¸¶¿Í·¹
 				{
-					glTranslatef(0, 10, 40);
+					glTranslatef(0, +15, 40);
 					glRotatef(90, 0, 1, 0);
+					glScalef(2, 0.5, 40);
 					glRotatef(run_ro, 0, 0, 1);
-					//glScalef(2, 0.5, 2);
 					glColor3ub(255, 0, 0);
-					glutWireTorus(20, 20, 30, 15);
+					glutWireTorus(1, 20, 30, 15);
 				}
 				glPopMatrix();
 			}
@@ -359,6 +392,31 @@ void drawScene()
 					gluSphere(glu_fill, 10, 10, 10);
 				}
 				glPopMatrix();
+
+				glPushMatrix();
+				{
+					glTranslatef(0, -60, 0);
+					glRotatef(leg_ro[0], 1, 0, 0);
+
+					glTranslatef(-15, -15, 0);
+					glColor3ub(0, 0, 200);
+					glScalef(1, 5, 1);
+					glutSolidCube(6);
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				{
+					glTranslatef(0, -60, 0);
+					glRotatef(leg_ro[1], 1, 0, 0);
+
+					glTranslatef(15, -15, 0);
+					glColor3ub(0, 0, 200);
+					glScalef(1, 5, 1);
+					glutSolidCube(6);
+				}
+				glPopMatrix();
+
 			}
 			glPopMatrix();
 		}

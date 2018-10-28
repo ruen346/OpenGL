@@ -14,6 +14,11 @@ struct Ob
 	int active = 1;
 };
 
+struct Block
+{
+	int active[2];
+};
+
 class Any
 {
 public:
@@ -23,8 +28,15 @@ public:
 
 	int shack = 0;
 	int move = 0;//1왼쪽잡음 2오른쪽잡음
+
+	int semo_you = 0;//1왼쪽에서 짜름 2오른쪽에서 짜름
 	
 	int star_count = 0;//몇번째 별
+	int star_color[3];
+
+	int move_x[2];
+	int move_y[2];
+	int move_count[2];
 };
 
 Ob up_tr[10];
@@ -32,6 +44,7 @@ Ob nemo;
 Ob semo[2];
 Ob star[100];
 Any any;
+Block block[3][16];
 
 void Timer(int value)
 {
@@ -74,6 +87,27 @@ void Timer(int value)
 		nemo.active = 1;
 		nemo.y = 600;
 	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (any.star_color[i] >= 255)
+			any.star_color[i] = 0;
+		else
+			any.star_color[i] += 5;
+	}
+
+	for (int i = 0; i < 100; i++)
+	{
+		if (star[i].active == 1)
+		{
+			if (star[i].ro < 360)
+				star[i].ro += 5;
+			else
+				star[i].ro = 0;
+			
+		}
+	}
+
 
 	glutPostRedisplay(); // 화면 재 출력 
 	glutTimerFunc(20, Timer, 1); // 타이머함수 재 설정
@@ -139,7 +173,7 @@ void Mouse(int button, int state, int x, int y)
 				int a = abs((left_x - right_x) / (left_y - right_y));
 				cout << abs((left_x - nemo.x) / (left_y - nemo.y)) - a << " " << abs((right_x - nemo.x + 50) / (right_y - nemo.y + 50)) - a << endl;
 				if (abs((left_x - nemo.x) / (left_y - nemo.y)) - a < 0.5 && abs((right_x - nemo.x + 50) / (right_y - nemo.y + 50)) - a < 0.5)
-				{
+				{//왼쪽 위 자름
 					nemo.active = 0;
 					semo[0].active = 1;
 					semo[1].active = 1;
@@ -149,26 +183,58 @@ void Mouse(int button, int state, int x, int y)
 					semo[1].y = nemo.y;
 
 					any.shack = 20;
+					any.semo_you = 1;
+				}
+				else if (abs((left_x - nemo.x + 50) / (left_y - nemo.y)) - a < 0.5 && abs((right_x - nemo.x) / (right_y - nemo.y + 50)) - a < 0.5)
+				{//오른쪽 위 자름
+					nemo.active = 0;
+					semo[0].active = 1;
+					semo[1].active = 1;
+					semo[0].x = nemo.x;
+					semo[1].x = nemo.x;
+					semo[0].y = nemo.y;
+					semo[1].y = nemo.y;
+
+					any.shack = 20;
+					any.semo_you = 2;
 				}
 			}
 			any.cut_active = 0;
 		}
 		if (any.move == 1 || any.move == 2)//나뉜 삼각형 놓을때
 		{
-			if (any.move == 1)
+			if (any.move == 1)//왼쪽거
 			{
 				for (int i = 0; i < 10; i++)
 				{
 					if (up_tr[i].active == 1 && x > up_tr[i].x - 25 && x < up_tr[i].x + 25 && y > up_tr[i].y - 25 && y < up_tr[i].y + 25)
 					{
 						up_tr[i].active = 0;
-						semo[i].active = 0;
-						semo[i].y = 800;
+						semo[0].active = 0;
+						semo[0].y = 800;
 						star[any.star_count].active = 1;
+						star[any.star_count].x = rand() % 700 + 50;
+						star[any.star_count].y = rand() % 300 + 150;
+						any.star_count++;
+						i = 10;
+					}	
+				}
+			}
+			if (any.move == 2)//오른쪽거
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					if (up_tr[i].active == 1 && x > up_tr[i].x - 25 && x < up_tr[i].x + 25 && y > up_tr[i].y - 25 && y < up_tr[i].y + 25)
+					{
+						up_tr[i].active = 0;
+						semo[1].active = 0;
+						semo[1].y = 800;
+						star[any.star_count].active = 1;
+						star[any.star_count].x = rand() % 700 + 50;
+						star[any.star_count].y = rand() % 300 + 150;
 						any.star_count++;
 						i = 10;
 					}
-					cout << up_tr[i].x << " " << up_tr[i].y << " / " << x << " " << y << endl;
 				}
 			}
 			any.move = 0;
@@ -195,7 +261,6 @@ void Motion(int x, int y)
 		semo[1].y = y;
 	}
 }
-
 
 void main(int argc, char *argv[])
 {
@@ -260,15 +325,36 @@ GLvoid drawScene(GLvoid)
 
 		for (int i = 0; i < 100; i++)//별그리기
 		{
-			if (star[i].active != 1)
-				break;
+			glPushMatrix();
+			{
+				if (star[i].active == 1)
+				{
+					glTranslatef(star[i].x,star[i].y,0);
+					glRotatef(star[i].ro, 0, 0, 1);
 
-			glColor3ub(255, 255, 255);
-			glBegin(GL_POLYGON);
-			glVertex2f(0, 0 - 25);
-			glVertex2f(0 - 25, 0 + 25);
-			glVertex2f(0 + 25, 0 + 25);
-			glEnd();
+					glShadeModel(GL_SMOOTH);
+
+					glBegin(GL_POLYGON);
+					glColor3ub(any.star_color[0], any.star_color[1], 255);
+					glVertex2f(0, - 25);
+					glColor3ub(any.star_color[1], 255, any.star_color[2]);
+					glVertex2f(- 25, 25);
+					glColor3ub(255, any.star_color[2], any.star_color[0]);
+					glVertex2f(25, 25);
+					glEnd();
+					glBegin(GL_POLYGON);
+					glColor3ub(any.star_color[0], any.star_color[1], 255);
+					glVertex2f(25, 10);
+					glColor3ub(any.star_color[1], 255, any.star_color[2]);
+					glVertex2f(0, 40);
+					glColor3ub(255, any.star_color[2], any.star_color[0]);
+					glVertex2f(- 25, - 10);
+					glEnd();
+
+					glShadeModel(GL_FLAT);
+				}
+			}
+			glPopMatrix();
 		}
 
 		glColor3ub(255, 255, 255);
@@ -306,29 +392,56 @@ GLvoid drawScene(GLvoid)
 		}
 		glPopMatrix();
 
-		if (nemo.active == 0)
+		if (nemo.active == 0)//새세모그리기!!
 		{
-			glPushMatrix();
+			if (any.semo_you == 1)//왼쪽 위 자름
 			{
-				glTranslatef(semo[0].x, semo[0].y, 0.0);
-				glBegin(GL_POLYGON);
-				glVertex2f(-25, -25);
-				glVertex2f(25, 25);
-				glVertex2f(-25, 25);
-				glEnd();
-			}
-			glPopMatrix();
+				glPushMatrix();
+				{
+					glTranslatef(semo[0].x, semo[0].y, 0.0);
+					glBegin(GL_POLYGON);
+					glVertex2f(-25, -25);
+					glVertex2f(25, 25);
+					glVertex2f(-25, 25);
+					glEnd();
+				}
+				glPopMatrix();
 
-			glPushMatrix();
-			{
-				glTranslatef(semo[1].x, semo[1].y, 0.0);
-				glBegin(GL_POLYGON);
-				glVertex2f(25, -25);
-				glVertex2f(-25, -25);
-				glVertex2f(25, 25);
-				glEnd();
+				glPushMatrix();
+				{
+					glTranslatef(semo[1].x, semo[1].y, 0.0);
+					glBegin(GL_POLYGON);
+					glVertex2f(25, -25);
+					glVertex2f(-25, -25);
+					glVertex2f(25, 25);
+					glEnd();
+				}
+				glPopMatrix();
 			}
-			glPopMatrix();
+			else if (any.semo_you == 2)//오른쪽 위 자름
+			{
+				glPushMatrix();
+				{
+					glTranslatef(semo[0].x, semo[0].y, 0.0);
+					glBegin(GL_POLYGON);
+					glVertex2f(-25, -25);
+					glVertex2f(25, -25);
+					glVertex2f(-25, 25);
+					glEnd();
+				}
+				glPopMatrix();
+
+				glPushMatrix();
+				{
+					glTranslatef(semo[1].x, semo[1].y, 0.0);
+					glBegin(GL_POLYGON);
+					glVertex2f(25, -25);
+					glVertex2f(-25, 25);
+					glVertex2f(25, 25);
+					glEnd();
+				}
+				glPopMatrix();
+			}
 		}
 
 		if (any.cut_active == 1)
