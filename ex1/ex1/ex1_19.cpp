@@ -18,7 +18,6 @@ float ball_ro[3];
 void SetupRC()
 {
 	srand(time(NULL));
-
 }
 
 void Timer(int value)

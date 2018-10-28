@@ -9,7 +9,7 @@ GLvoid Reshape(int w, int h);
 struct Ob
 {
 	float x = -100;
-	float y = 20;
+	float y = 20 + 25;
 	int ro = 0;
 	int active = 1;
 };
@@ -23,13 +23,14 @@ public:
 
 	int shack = 0;
 	int move = 0;//1왼쪽잡음 2오른쪽잡음
+	
+	int star_count = 0;//몇번째 별
 };
-
-
 
 Ob up_tr[10];
 Ob nemo;
 Ob semo[2];
+Ob star[100];
 Any any;
 
 void Timer(int value)
@@ -37,8 +38,11 @@ void Timer(int value)
 	for (int i = 0; i < 10; i++)
 	{
 		up_tr[i].x += 1;
-		if (up_tr[i].x > 800)
-			up_tr[i].x = -50;
+		if (up_tr[i].x > 825)
+		{
+			up_tr[i].x = -25;
+			up_tr[i].active = 1;
+		}
 
 		if (up_tr[i].ro < 357)
 			up_tr[i].ro += 2;
@@ -149,8 +153,26 @@ void Mouse(int button, int state, int x, int y)
 			}
 			any.cut_active = 0;
 		}
-		if (any.move == 1 || any.move == 2)
+		if (any.move == 1 || any.move == 2)//나뉜 삼각형 놓을때
+		{
+			if (any.move == 1)
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					if (up_tr[i].active == 1 && x > up_tr[i].x - 25 && x < up_tr[i].x + 25 && y > up_tr[i].y - 25 && y < up_tr[i].y + 25)
+					{
+						up_tr[i].active = 0;
+						semo[i].active = 0;
+						semo[i].y = 800;
+						star[any.star_count].active = 1;
+						any.star_count++;
+						i = 10;
+					}
+					cout << up_tr[i].x << " " << up_tr[i].y << " / " << x << " " << y << endl;
+				}
+			}
 			any.move = 0;
+		}
 	}
 }
 
@@ -183,10 +205,12 @@ void main(int argc, char *argv[])
 		up_tr[i].x = i * 85;
 		up_tr[i].ro = i * 36;
 	}
-	nemo.x = 375;
+	nemo.x = 400;
 	nemo.y = 600;
 	semo[0].active = 0;
 	semo[1].active = 0;
+	for (int i = 0; i < 100; i++)
+		star[i].active = 0;
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA); // 디스플레이 모드 설정 
@@ -234,12 +258,23 @@ GLvoid drawScene(GLvoid)
 		}
 		glEnd();
 
-		glPushMatrix();
+		for (int i = 0; i < 100; i++)//별그리기
 		{
-			glTranslatef(25, 25, 0.0);
+			if (star[i].active != 1)
+				break;
 
 			glColor3ub(255, 255, 255);
-			for (int i = 0; i < 10; i++)
+			glBegin(GL_POLYGON);
+			glVertex2f(0, 0 - 25);
+			glVertex2f(0 - 25, 0 + 25);
+			glVertex2f(0 + 25, 0 + 25);
+			glEnd();
+		}
+
+		glColor3ub(255, 255, 255);
+		for (int i = 0; i < 10; i++)
+		{
+			if (up_tr[i].active == 1)
 			{
 				glPushMatrix();
 				{
@@ -254,48 +289,47 @@ GLvoid drawScene(GLvoid)
 				}
 				glPopMatrix();
 			}
+		}
 
-			glPushMatrix();
+		glPushMatrix();
+		{
+			if (nemo.active == 1)
 			{
-				if (nemo.active == 1)
-				{
-					glTranslatef(nemo.x, nemo.y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(-25, -25);
-					glVertex2f(-25, +25);
-					glVertex2f(+25, +25);
-					glVertex2f(+25, -25);
-					glEnd();
-				}
-			}
-			glPopMatrix();
-
-			if (nemo.active == 0)
-			{
-				glPushMatrix();
-				{
-					glTranslatef(semo[0].x, semo[0].y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(-25, -25);
-					glVertex2f(25, 25);
-					glVertex2f(-25, 25);
-					glEnd();
-				}
-				glPopMatrix();
-
-				glPushMatrix();
-				{
-					glTranslatef(semo[1].x, semo[1].y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(25, -25);
-					glVertex2f(-25, -25);
-					glVertex2f(25, 25);
-					glEnd();
-				}
-				glPopMatrix();
+				glTranslatef(nemo.x, nemo.y, 0.0);
+				glBegin(GL_POLYGON);
+				glVertex2f(-25, -25);
+				glVertex2f(-25, +25);
+				glVertex2f(+25, +25);
+				glVertex2f(+25, -25);
+				glEnd();
 			}
 		}
 		glPopMatrix();
+
+		if (nemo.active == 0)
+		{
+			glPushMatrix();
+			{
+				glTranslatef(semo[0].x, semo[0].y, 0.0);
+				glBegin(GL_POLYGON);
+				glVertex2f(-25, -25);
+				glVertex2f(25, 25);
+				glVertex2f(-25, 25);
+				glEnd();
+			}
+			glPopMatrix();
+
+			glPushMatrix();
+			{
+				glTranslatef(semo[1].x, semo[1].y, 0.0);
+				glBegin(GL_POLYGON);
+				glVertex2f(25, -25);
+				glVertex2f(-25, -25);
+				glVertex2f(25, 25);
+				glEnd();
+			}
+			glPopMatrix();
+		}
 
 		if (any.cut_active == 1)
 		{
