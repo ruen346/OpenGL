@@ -27,6 +27,17 @@ int leg_sw[2];
 int air_ro;
 int pro_ro;
 
+
+float ball[3];
+float ball_ro[3];
+
+
+int d[3];//하부 좌표
+int d_ro[3];
+int m_ro[3];
+int u_ro[3];
+
+
 void SetupRC()
 {
 
@@ -116,6 +127,81 @@ void Keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+	case 'a':
+		if (ball[0] > -300)
+			ball[0] -= 5;
+		ball_ro[0] -= 5;
+		break;
+	case 'd':
+		if (ball[0] < 300)
+			ball[0] += 5;
+		ball_ro[0] += 5;
+		break;
+	case 'w':
+		if (ball[2] > -300)
+			ball[2] -= 5;
+		ball_ro[2] -= 5;
+		break;
+	case 's':
+		if (ball[2] < 300)
+			ball[2] += 5;
+		ball_ro[2] += 5;
+		break;
+
+
+	case 'f':
+		if (d[0] > -300)
+			d[0] -= 5;
+		break;
+	case 'h':
+		if (d[0] < 300)
+			d[0] += 5;
+		break;
+	case 't':
+		if (d[2] > -300)
+			d[2] -= 5;
+		break;
+	case 'g':
+		if (d[2] < 300)
+			d[2] += 5;
+		break;
+
+	case 'z':
+		d_ro[1] += 10;
+		break;
+	case 'Z':
+		d_ro[1] -= 10;
+		break;
+
+	case 'x':
+		m_ro[0] += 10;
+		break;
+	case 'X':
+		m_ro[0] -= 10;
+		break;
+
+	case 'c':
+		m_ro[2] += 10;
+		break;
+	case 'C':
+		m_ro[2] -= 10;
+		break;
+
+	case 'v':
+		u_ro[0] += 10;
+		break;
+	case 'V':
+		u_ro[0] -= 10;
+		break;
+
+	case 'b':
+		u_ro[2] += 10;
+		break;
+	case 'B':
+		u_ro[2] -= 10;
+		break;
+
+
 	case '[':
 		y_ro += 5;
 		break;
@@ -215,6 +301,59 @@ void drawScene()
 			glVertex3f(0, 0, 300);
 			glVertex3f(300, 0, 0);
 			glEnd();
+		}
+		glPopMatrix();
+
+		glPushMatrix();//공
+		{
+			glTranslatef(ball[0], 30, ball[2]);
+			glRotatef(ball_ro[0] * -360 / (60 * 3.141592), 0, 0, 1);
+			glRotatef(ball_ro[2] * 360 / (60 * 3.141592), 1, 0, 0);
+			glRotatef(ball_ro[1] * 360 / (60 * 3.141592), 0, 1, 0);
+			glColor3f(0, 0, 1);
+			gluSphere(glu_line, 30, 20, 20);
+		}
+		glPopMatrix();
+
+		glPushMatrix();//하중상부
+		{
+			glTranslatef(d[0], d[1] + 15, d[2]);
+			glRotatef(d_ro[1], 0, 1, 0);
+			glPushMatrix();//하부
+			{
+				glColor3f(1, 0, 0);
+				glScalef(2, 1, 2);
+				glutSolidCube(30);
+			}
+			glPopMatrix();
+
+			glTranslatef(0, 15, 0);
+			glRotatef(m_ro[0], 1, 0, 0);
+			glRotatef(m_ro[2], 0, 1, 0);
+			glTranslatef(0, -15, 0);
+
+			glPushMatrix();//중부
+			{
+				glTranslatef(0, 25, 0);
+				glColor3f(0, 1, 0);
+				glScalef(1, 2, 1);
+				glutSolidCube(10);
+			}
+			glPopMatrix();
+
+			glTranslatef(0, 30, 0);
+			glRotatef(u_ro[0], 1, 0, 0);
+			glRotatef(u_ro[2], 0, 1, 0);
+			glTranslatef(0, -30, 0);
+
+			glPushMatrix();//하부
+			{
+				glTranslatef(0, 40, 0);
+				glColor3f(0, 0, 1);
+				glScalef(1, 2, 1);
+				glutSolidCube(5);
+			}
+			glPopMatrix();
 		}
 		glPopMatrix();
 
