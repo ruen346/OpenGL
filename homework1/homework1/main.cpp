@@ -12,11 +12,31 @@ struct Ob
 	float y = 20 + 25;
 	int ro = 0;
 	int active = 1;
+
+	float move_x = 0;
+	float move_y = 0;
+	int move_count = 0;
+};
+
+struct Ob2
+{
+	float x = -100;
+	float y = 20 + 25;
+	int ro = 0;
+	int active = 1;
+
+	float now_x = 0;
+	float now_y = 0;
+	float point_x = 0;
+	float point_y = 0;
+	float move_x = 0;
+	float move_y = 0;
+	int move_count = 0;
 };
 
 struct Block
 {
-	int active[2];
+	int active = 0;//0비어있음 1하나차있음 2꽉차있음오지마셈
 };
 
 class Any
@@ -41,7 +61,7 @@ public:
 
 Ob up_tr[10];
 Ob nemo;
-Ob semo[2];
+Ob2 semo[2];
 Ob star[100];
 Any any;
 Block block[3][16];
@@ -68,25 +88,8 @@ void Timer(int value)
 	else
 		nemo.y -= 3;
 
-	if (semo[0].active == 1 && any.move != 1)
-	{
-		semo[0].x -= 5;
-		semo[0].y += 5;
-	}
-	if (semo[1].active == 1 && any.move != 2)
-	{
-		semo[1].x += 5;
-		semo[1].y += 5;
-	}
-
 	if (any.shack > 0)
 		any.shack--;
-
-	if (semo[0].y > 600 && semo[1].y > 600 && nemo.active == 0)
-	{
-		nemo.active = 1;
-		nemo.y = 600;
-	}
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -105,6 +108,60 @@ void Timer(int value)
 			else
 				star[i].ro = 0;
 			
+			if (star[i].move_count != 0)
+			{
+				star[i].x += star[i].move_x;
+				star[i].y += star[i].move_y;
+				star[i].move_count--;
+			}
+		}
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (semo[i].move_count != 100 && semo[i].active == 1)
+		{
+			if(i == 0 && any.move != 1)
+			{
+				float set1_x = semo[i].now_x - ((semo[i].now_x - semo[i].point_x) / 100 * semo[i].move_count);
+				float set2_x = semo[i].point_x - ((semo[i].point_x - semo[i].move_x) / 100 * semo[i].move_count);
+				float set1_y = semo[i].now_y - ((semo[i].now_y - semo[i].point_y) / 100 * semo[i].move_count);
+				float set2_y = semo[i].point_y - ((semo[i].point_y - semo[i].move_y) / 100 * semo[i].move_count);
+				float new_x = set1_x - ((set1_x - set2_x) / 100 * semo[i].move_count);
+				float new_y = set1_y - ((set1_y - set2_y) / 100 * semo[i].move_count);
+
+				semo[i].x = new_x;
+				semo[i].y = new_y;
+				semo[i].move_count++;
+			}
+			if (i == 1 && any.move != 2)
+			{
+				float set1_x = semo[i].now_x - ((semo[i].now_x - semo[i].point_x) / 100 * semo[i].move_count);
+				float set2_x = semo[i].point_x - ((semo[i].point_x - semo[i].move_x) / 100 * semo[i].move_count);
+				float set1_y = semo[i].now_y - ((semo[i].now_y - semo[i].point_y) / 100 * semo[i].move_count);
+				float set2_y = semo[i].point_y - ((semo[i].point_y - semo[i].move_y) / 100 * semo[i].move_count);
+				float new_x = set1_x - ((set1_x - set2_x) / 100 * semo[i].move_count);
+				float new_y = set1_y - ((set1_y - set2_y) / 100 * semo[i].move_count);
+
+				semo[i].x = new_x;
+				semo[i].y = new_y;
+				semo[i].move_count++;
+			}
+		}
+		else if (semo[i].move_count == 100 && semo[i].active == 1)
+		{
+			semo[i].active = 0;
+			int xx = (semo[i].move_x - 25) / 50;
+			int yy = -(semo[i].move_y - 575) / 50;
+
+			block[yy][xx].active++;
+			cout << xx << " " << yy << endl;
+			
+			if (semo[0].active == 0 && semo[1].active == 0)
+			{
+				nemo.active = 1;
+				nemo.y = 600;
+			}
 		}
 	}
 
@@ -182,6 +239,45 @@ void Mouse(int button, int state, int x, int y)
 					semo[0].y = nemo.y;
 					semo[1].y = nemo.y;
 
+					//넌 어디로 날라갈레 삼각형아?
+					for (int i = 0; i < 2; i++)
+					{
+						int go_x = 0;
+						int go_y = 2;
+						int pass = 1;
+						do
+						{
+							pass = 1;
+							go_x = rand() % 16;
+							if (block[0][go_x].active != 2)
+							{
+								go_y = 0;
+								pass = 0;
+							}
+							else if (block[1][go_x].active != 2)
+							{
+								go_y = 1;
+								pass = 0;
+							}
+							else if (block[2][go_x].active != 2)
+							{
+								go_y = 2;
+								pass = 0;
+							}
+						} while (pass);
+
+						semo[i].now_x = semo[i].x;
+						semo[i].now_y = semo[i].y;
+						if(i == 0)
+							semo[i].point_x = 0;
+						else
+							semo[i].point_x = 800;
+						semo[i].point_y = semo[i].y;
+						semo[i].move_x = go_x * 50 + 25;
+						semo[i].move_y = 575 - go_y * 50;
+						semo[i].move_count = 0;
+					}
+
 					any.shack = 20;
 					any.semo_you = 1;
 				}
@@ -197,6 +293,45 @@ void Mouse(int button, int state, int x, int y)
 
 					any.shack = 20;
 					any.semo_you = 2;
+
+					//넌 어디로 날라갈레 삼각형아?
+					for (int i = 0; i < 2; i++)
+					{
+						int go_x = 0;
+						int go_y = 2;
+						int pass = 1;
+						do
+						{
+							pass = 1;
+							go_x = rand() % 16;
+							if (block[0][go_x].active != 2)
+							{
+								go_y = 0;
+								pass = 0;
+							}
+							else if (block[1][go_x].active != 2)
+							{
+								go_y = 1;
+								pass = 0;
+							}
+							else if (block[2][go_x].active != 2)
+							{
+								go_y = 2;
+								pass = 0;
+							}
+						} while (pass);
+
+						semo[i].now_x = semo[i].x;
+						semo[i].now_y = semo[i].y;
+						if (i == 0)
+							semo[i].point_x = 0;
+						else
+							semo[i].point_x = 800;
+						semo[i].point_y = semo[i].y;
+						semo[i].move_x = go_x * 50 + 25;
+						semo[i].move_y = 575 - go_y * 50;
+						semo[i].move_count = 0;
+					}
 				}
 			}
 			any.cut_active = 0;
@@ -209,14 +344,23 @@ void Mouse(int button, int state, int x, int y)
 				{
 					if (up_tr[i].active == 1 && x > up_tr[i].x - 25 && x < up_tr[i].x + 25 && y > up_tr[i].y - 25 && y < up_tr[i].y + 25)
 					{
+						star[any.star_count].x = up_tr[i].x;
+						star[any.star_count].y = up_tr[i].y;
 						up_tr[i].active = 0;
 						semo[0].active = 0;
 						semo[0].y = 800;
 						star[any.star_count].active = 1;
-						star[any.star_count].x = rand() % 700 + 50;
-						star[any.star_count].y = rand() % 300 + 150;
+						star[any.star_count].move_count = 50;
+						star[any.star_count].move_x = (rand() % 700 + 50 - star[any.star_count].x) / 50;
+						star[any.star_count].move_y = (rand() % 300 + 150 - star[any.star_count].y) / 50;
 						any.star_count++;
 						i = 10;
+
+						if (semo[0].active == 0 && semo[1].active == 0)
+						{
+							nemo.active = 1;
+							nemo.y = 600;
+						}
 					}	
 				}
 			}
@@ -226,14 +370,23 @@ void Mouse(int button, int state, int x, int y)
 				{
 					if (up_tr[i].active == 1 && x > up_tr[i].x - 25 && x < up_tr[i].x + 25 && y > up_tr[i].y - 25 && y < up_tr[i].y + 25)
 					{
+						star[any.star_count].x = up_tr[i].x;
+						star[any.star_count].y = up_tr[i].y;
 						up_tr[i].active = 0;
 						semo[1].active = 0;
 						semo[1].y = 800;
 						star[any.star_count].active = 1;
-						star[any.star_count].x = rand() % 700 + 50;
-						star[any.star_count].y = rand() % 300 + 150;
+						star[any.star_count].move_count = 50;
+						star[any.star_count].move_x = (rand() % 700 + 50 - star[any.star_count].x) / 50;
+						star[any.star_count].move_y = (rand() % 300 + 150 - star[any.star_count].y) / 50;
 						any.star_count++;
 						i = 10;
+
+						if (semo[0].active == 0 && semo[1].active == 0)
+						{
+							nemo.active = 1;
+							nemo.y = 600;
+						}
 					}
 				}
 			}
@@ -299,6 +452,36 @@ GLvoid drawScene(GLvoid)
 
 	glPushMatrix();
 	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 16; j++)
+			{
+				glPushMatrix();
+				{
+					glTranslated(j * 50 + 25, 575 - i * 50, 0);
+					if (block[i][j].active > 0)
+					{
+						glBegin(GL_POLYGON);
+						glColor3ub(150, 150, 150);
+						glVertex2f(25, -25);
+						glVertex2f(25, 25);
+						glVertex2f(-25, 25);
+						glEnd();
+					}
+					if (block[i][j].active > 1)
+					{
+						glBegin(GL_POLYGON);
+						glColor3ub(150, 150, 150);
+						glVertex2f(25, -25);
+						glVertex2f(-25, -25);
+						glVertex2f(-25, 25);
+						glEnd();
+					}
+				}
+				glPopMatrix();
+			}
+		}
+
 		if (any.shack != 0)
 		{
 			if(any.shack > 10)
