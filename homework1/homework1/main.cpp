@@ -208,29 +208,34 @@ void Mouse(int button, int state, int x, int y)
 			{
 				left_x = any.cut_x[0];
 				right_x = any.cut_x[1];
-			}
-			else
-			{
-				left_x = any.cut_x[1];
-				right_x = any.cut_x[0];
-			}
-			if (any.cut_y[0] < any.cut_y[1])
-			{
 				left_y = any.cut_y[0];
 				right_y = any.cut_y[1];
 			}
 			else
 			{
+				left_x = any.cut_x[1];
+				right_x = any.cut_x[0];
 				left_y = any.cut_y[1];
 				right_y = any.cut_y[0];
 			}
 
-			if (left_x < nemo.x && right_x > nemo.x + 50 && left_y < nemo.y && right_y > nemo.y + 50)
+			if (left_x < nemo.x && right_x > nemo.x + 50 && left_y < nemo.y && right_y > nemo.y + 50)//왼쪽 위 자름
 			{
-				int a = abs((left_x - right_x) / (left_y - right_y));
-				cout << abs((left_x - nemo.x) / (left_y - nemo.y)) - a << " " << abs((right_x - nemo.x + 50) / (right_y - nemo.y + 50)) - a << endl;
-				if (abs((left_x - nemo.x) / (left_y - nemo.y)) - a < 0.5 && abs((right_x - nemo.x + 50) / (right_y - nemo.y + 50)) - a < 0.5)
-				{//왼쪽 위 자름
+				float far_x = abs(right_x - left_x);//선분x길이
+				float far_y = abs(right_y - left_y);//선분y길이
+
+				float check1_x = abs(nemo.x - 25 - left_x);//첫점까지x거리
+				float be1_x = check1_x / far_x;//몇대 몇?
+				float line1_y = left_y + far_y * be1_x;  
+				cout << "line1_y : " << line1_y << "     nemo.y - 25 : " << nemo.y - 25 << " /     " << abs(line1_y - (nemo.y - 25)) << endl;
+
+				float check2_x = abs(nemo.x + 25 - left_x);//첫점까지x거리
+				float be2_x = check2_x / far_x;//몇대 몇?
+				float line2_y = left_y + far_y * be2_x;
+				cout << "line2_y : " << line2_y << "     nemo.y + 25 : " << nemo.y + 25 << " /     " << abs(line2_y - (nemo.y + 25)) << endl;
+
+				if (abs(line1_y - (nemo.y - 25)) < 15 && abs(line2_y - (nemo.y + 25)) < 15)
+				{
 					nemo.active = 0;
 					semo[0].active = 1;
 					semo[1].active = 1;
@@ -281,8 +286,25 @@ void Mouse(int button, int state, int x, int y)
 					any.shack = 20;
 					any.semo_you = 1;
 				}
-				else if (abs((left_x - nemo.x + 50) / (left_y - nemo.y)) - a < 0.5 && abs((right_x - nemo.x) / (right_y - nemo.y + 50)) - a < 0.5)
-				{//오른쪽 위 자름
+			}
+
+			else if (left_x < nemo.x && right_x > nemo.x + 50 && right_y < nemo.y && left_y > nemo.y + 50)//오른쪽 위 자름
+			{
+				float far_x = abs(right_x - left_x);//선분x길이
+				float far_y = abs(right_y - left_y);//선분y길이
+
+				float check1_x = abs(right_x - (nemo.x + 25));//첫점까지x거리
+				float be1_x = check1_x / far_x;//몇대 몇?
+				float line1_y = right_y + far_y * be1_x;
+				cout << "line1_y : " << line1_y << "     nemo.y - 25 : " << nemo.y - 25 << " /     " << abs(line1_y - (nemo.y - 25)) << endl;
+
+				float check2_x = abs(right_x - (nemo.x - 25));//첫점까지x거리
+				float be2_x = check2_x / far_x;//몇대 몇?
+				float line2_y = right_y + far_y * be2_x;
+				cout << "line2_y : " << line2_y << "     nemo.y + 25 : " << nemo.y + 25 << " /     " << abs(line2_y - (nemo.y + 25)) << endl;
+
+				if (abs(line1_y - (nemo.y - 25)) < 15 && abs(line2_y - (nemo.y + 25)) < 15)
+				{
 					nemo.active = 0;
 					semo[0].active = 1;
 					semo[1].active = 1;
@@ -334,6 +356,7 @@ void Mouse(int button, int state, int x, int y)
 					}
 				}
 			}
+
 			any.cut_active = 0;
 		}
 		if (any.move == 1 || any.move == 2)//나뉜 삼각형 놓을때
