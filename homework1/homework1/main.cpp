@@ -16,6 +16,9 @@ struct Ob
 	float move_x = 0;
 	float move_y = 0;
 	int move_count = 0;
+
+	float big = 1;
+	int big_sw = 0;
 };
 
 struct Ob2
@@ -49,7 +52,7 @@ public:
 	int shack = 0;
 	int move = 0;//1왼쪽잡음 2오른쪽잡음
 
-	int semo_you = 0;//1왼쪽에서 짜름 2오른쪽에서 짜름
+	int semo_you = 0;//1왼쪽에서 짜름 2오른쪽에서 짜름 3가로짜름 4세로짜름
 	
 	int star_count = 0;//몇번째 별
 	int star_color[3];
@@ -57,6 +60,9 @@ public:
 	int move_x[2];
 	int move_y[2];
 	int move_count[2];
+
+	int shine = 150;
+	int shine_sw = 0;
 };
 
 Ob up_tr[10];
@@ -68,6 +74,21 @@ Block block[3][16];
 
 void Timer(int value)
 {
+	if (any.shine_sw == 0)
+	{
+		if (any.shine < 180)
+			any.shine++;
+		else
+			any.shine_sw = 1;
+	}
+	else if (any.shine_sw == 1)
+	{
+		if (any.shine > 120)
+			any.shine--;
+		else
+			any.shine_sw = 0;
+	}
+
 	for (int i = 0; i < 10; i++)
 	{
 		up_tr[i].x += 1;
@@ -84,7 +105,14 @@ void Timer(int value)
 	}
 
 	if (nemo.active == 1 && nemo.y < -50)
+	{
 		nemo.y = 600;
+		int ch = rand() % 2;
+		if (ch == 1)
+			nemo.ro = 0;
+		else
+			nemo.ro = 45;
+	}
 	else
 		nemo.y -= 3;
 
@@ -113,6 +141,21 @@ void Timer(int value)
 				star[i].x += star[i].move_x;
 				star[i].y += star[i].move_y;
 				star[i].move_count--;
+			}
+
+			if (star[i].big_sw == 0)
+			{
+				if (star[i].big < 1.5)
+					star[i].big += 0.05;
+				else
+					star[i].big_sw = 1;
+			}
+			else if (star[i].big_sw == 1)
+			{
+				if (star[i].big > 0.5)
+					star[i].big -= 0.05;
+				else
+					star[i].big_sw = 0;
 			}
 		}
 	}
@@ -161,6 +204,12 @@ void Timer(int value)
 			{
 				nemo.active = 1;
 				nemo.y = 600;
+				
+				int ch = rand() % 2;
+				if (ch == 1)
+					nemo.ro = 0;
+				else
+					nemo.ro = 45;
 			}
 		}
 	}
@@ -219,140 +268,288 @@ void Mouse(int button, int state, int x, int y)
 				right_y = any.cut_y[0];
 			}
 
-			if (left_x < nemo.x && right_x > nemo.x + 50 && left_y < nemo.y && right_y > nemo.y + 50)//왼쪽 위 자름
+			if (nemo.ro == 0 && nemo.y > 130)//네모 자름
 			{
-				float far_x = abs(right_x - left_x);//선분x길이
-				float far_y = abs(right_y - left_y);//선분y길이
-
-				float check1_x = abs(nemo.x - 25 - left_x);//첫점까지x거리
-				float be1_x = check1_x / far_x;//몇대 몇?
-				float line1_y = left_y + far_y * be1_x;  
-				cout << "line1_y : " << line1_y << "     nemo.y - 25 : " << nemo.y - 25 << " /     " << abs(line1_y - (nemo.y - 25)) << endl;
-
-				float check2_x = abs(nemo.x + 25 - left_x);//첫점까지x거리
-				float be2_x = check2_x / far_x;//몇대 몇?
-				float line2_y = left_y + far_y * be2_x;
-				cout << "line2_y : " << line2_y << "     nemo.y + 25 : " << nemo.y + 25 << " /     " << abs(line2_y - (nemo.y + 25)) << endl;
-
-				if (abs(line1_y - (nemo.y - 25)) < 15 && abs(line2_y - (nemo.y + 25)) < 15)
+				if (left_x < nemo.x && right_x > nemo.x + 50 && left_y < nemo.y && right_y > nemo.y + 50)//왼쪽 위 자름
 				{
-					nemo.active = 0;
-					semo[0].active = 1;
-					semo[1].active = 1;
-					semo[0].x = nemo.x;
-					semo[1].x = nemo.x;
-					semo[0].y = nemo.y;
-					semo[1].y = nemo.y;
+					float far_x = abs(right_x - left_x);//선분x길이
+					float far_y = abs(right_y - left_y);//선분y길이
 
-					//넌 어디로 날라갈레 삼각형아?
-					for (int i = 0; i < 2; i++)
+					float check1_x = abs(nemo.x - 25 - left_x);//첫점까지x거리
+					float be1_x = check1_x / far_x;//몇대 몇?
+					float line1_y = left_y + far_y * be1_x;
+					cout << "line1_y : " << line1_y << "     nemo.y - 25 : " << nemo.y - 25 << " /     " << abs(line1_y - (nemo.y - 25)) << endl;
+
+					float check2_x = abs(nemo.x + 25 - left_x);//첫점까지x거리
+					float be2_x = check2_x / far_x;//몇대 몇?
+					float line2_y = left_y + far_y * be2_x;
+					cout << "line2_y : " << line2_y << "     nemo.y + 25 : " << nemo.y + 25 << " /     " << abs(line2_y - (nemo.y + 25)) << endl;
+
+					if (abs(line1_y - (nemo.y - 25)) < 15 && abs(line2_y - (nemo.y + 25)) < 15)
 					{
-						int go_x = 0;
-						int go_y = 2;
-						int pass = 1;
-						do
+						nemo.active = 0;
+						semo[0].active = 1;
+						semo[1].active = 1;
+						semo[0].x = nemo.x;
+						semo[1].x = nemo.x;
+						semo[0].y = nemo.y;
+						semo[1].y = nemo.y;
+
+						//넌 어디로 날라갈레 삼각형아?
+						int go_x = -1;
+						for (int i = 0; i < 2; i++)
 						{
-							pass = 1;
-							go_x = rand() % 16;
-							if (block[0][go_x].active != 2)
+							int go_y = 2;
+							int pass = 1;
+							do
 							{
-								go_y = 0;
-								pass = 0;
-							}
-							else if (block[1][go_x].active != 2)
-							{
-								go_y = 1;
-								pass = 0;
-							}
-							else if (block[2][go_x].active != 2)
-							{
-								go_y = 2;
-								pass = 0;
-							}
-						} while (pass);
+								pass = 1;
+								int go_x2 = rand() % 16;
+								while (1)
+								{
+									if (go_x2 != go_x)
+									{
+										go_x = go_x2;
+										break;
+									}
+								}
+								if (block[0][go_x].active != 2)
+								{
+									go_y = 0;
+									pass = 0;
+								}
+								else if (block[1][go_x].active != 2)
+								{
+									go_y = 1;
+									pass = 0;
+								}
+								else if (block[2][go_x].active != 2)
+								{
+									go_y = 2;
+									pass = 0;
+								}
+							} while (pass);
 
-						semo[i].now_x = semo[i].x;
-						semo[i].now_y = semo[i].y;
-						if(i == 0)
-							semo[i].point_x = 0;
-						else
-							semo[i].point_x = 800;
-						semo[i].point_y = semo[i].y;
-						semo[i].move_x = go_x * 50 + 25;
-						semo[i].move_y = 575 - go_y * 50;
-						semo[i].move_count = 0;
+							semo[i].now_x = semo[i].x;
+							semo[i].now_y = semo[i].y;
+							if (i == 0)
+								semo[i].point_x = 0;
+							else
+								semo[i].point_x = 800;
+							semo[i].point_y = semo[i].y;
+							semo[i].move_x = go_x * 50 + 25;
+							semo[i].move_y = 575 - go_y * 50;
+							semo[i].move_count = 0;
+						}
+
+						any.shack = 20;
+						any.semo_you = 1;
 					}
+				}
 
-					any.shack = 20;
-					any.semo_you = 1;
+				else if (left_x < nemo.x && right_x > nemo.x + 50 && right_y < nemo.y && left_y > nemo.y + 50)//오른쪽 위 자름
+				{
+					float far_x = abs(right_x - left_x);//선분x길이
+					float far_y = abs(right_y - left_y);//선분y길이
+
+					float check1_x = abs(right_x - (nemo.x + 25));//첫점까지x거리
+					float be1_x = check1_x / far_x;//몇대 몇?
+					float line1_y = right_y + far_y * be1_x;
+					cout << "line1_y : " << line1_y << "     nemo.y - 25 : " << nemo.y - 25 << " /     " << abs(line1_y - (nemo.y - 25)) << endl;
+
+					float check2_x = abs(right_x - (nemo.x - 25));//첫점까지x거리
+					float be2_x = check2_x / far_x;//몇대 몇?
+					float line2_y = right_y + far_y * be2_x;
+					cout << "line2_y : " << line2_y << "     nemo.y + 25 : " << nemo.y + 25 << " /     " << abs(line2_y - (nemo.y + 25)) << endl;
+
+					if (abs(line1_y - (nemo.y - 25)) < 15 && abs(line2_y - (nemo.y + 25)) < 15)
+					{
+						nemo.active = 0;
+						semo[0].active = 1;
+						semo[1].active = 1;
+						semo[0].x = nemo.x;
+						semo[1].x = nemo.x;
+						semo[0].y = nemo.y;
+						semo[1].y = nemo.y;
+
+						any.shack = 20;
+						any.semo_you = 2;
+
+						//넌 어디로 날라갈레 삼각형아?
+						int go_x = -1;
+						for (int i = 0; i < 2; i++)
+						{
+							int go_y = 2;
+							int pass = 1;
+							do
+							{
+								pass = 1;
+								int go_x2 = rand() % 16;
+								while (1)
+								{
+									if (go_x2 != go_x)
+									{
+										go_x = go_x2;
+										break;
+									}
+								}
+								if (block[0][go_x].active != 2)
+								{
+									go_y = 0;
+									pass = 0;
+								}
+								else if (block[1][go_x].active != 2)
+								{
+									go_y = 1;
+									pass = 0;
+								}
+								else if (block[2][go_x].active != 2)
+								{
+									go_y = 2;
+									pass = 0;
+								}
+							} while (pass);
+
+							semo[i].now_x = semo[i].x;
+							semo[i].now_y = semo[i].y;
+							if (i == 0)
+								semo[i].point_x = 0;
+							else
+								semo[i].point_x = 800;
+							semo[i].point_y = semo[i].y;
+							semo[i].move_x = go_x * 50 + 25;
+							semo[i].move_y = 575 - go_y * 50;
+							semo[i].move_count = 0;
+						}
+					}
 				}
 			}
-
-			else if (left_x < nemo.x && right_x > nemo.x + 50 && right_y < nemo.y && left_y > nemo.y + 50)//오른쪽 위 자름
+			if (nemo.ro == 45 && nemo.y > 130)//마름모 자름
 			{
-				float far_x = abs(right_x - left_x);//선분x길이
-				float far_y = abs(right_y - left_y);//선분y길이
-
-				float check1_x = abs(right_x - (nemo.x + 25));//첫점까지x거리
-				float be1_x = check1_x / far_x;//몇대 몇?
-				float line1_y = right_y + far_y * be1_x;
-				cout << "line1_y : " << line1_y << "     nemo.y - 25 : " << nemo.y - 25 << " /     " << abs(line1_y - (nemo.y - 25)) << endl;
-
-				float check2_x = abs(right_x - (nemo.x - 25));//첫점까지x거리
-				float be2_x = check2_x / far_x;//몇대 몇?
-				float line2_y = right_y + far_y * be2_x;
-				cout << "line2_y : " << line2_y << "     nemo.y + 25 : " << nemo.y + 25 << " /     " << abs(line2_y - (nemo.y + 25)) << endl;
-
-				if (abs(line1_y - (nemo.y - 25)) < 15 && abs(line2_y - (nemo.y + 25)) < 15)
+				if (abs(left_y-right_y) < abs(left_x - right_x))//가로 자름
 				{
-					nemo.active = 0;
-					semo[0].active = 1;
-					semo[1].active = 1;
-					semo[0].x = nemo.x;
-					semo[1].x = nemo.x;
-					semo[0].y = nemo.y;
-					semo[1].y = nemo.y;
-
-					any.shack = 20;
-					any.semo_you = 2;
-
-					//넌 어디로 날라갈레 삼각형아?
-					for (int i = 0; i < 2; i++)
+					if(abs((left_y - right_y) / (left_x - right_x)) < 0.25)
 					{
-						int go_x = 0;
-						int go_y = 2;
-						int pass = 1;
-						do
-						{
-							pass = 1;
-							go_x = rand() % 16;
-							if (block[0][go_x].active != 2)
-							{
-								go_y = 0;
-								pass = 0;
-							}
-							else if (block[1][go_x].active != 2)
-							{
-								go_y = 1;
-								pass = 0;
-							}
-							else if (block[2][go_x].active != 2)
-							{
-								go_y = 2;
-								pass = 0;
-							}
-						} while (pass);
+						nemo.active = 0;
+						semo[0].active = 1;
+						semo[1].active = 1;
+						semo[0].x = nemo.x;
+						semo[1].x = nemo.x;
+						semo[0].y = nemo.y;
+						semo[1].y = nemo.y;
 
-						semo[i].now_x = semo[i].x;
-						semo[i].now_y = semo[i].y;
-						if (i == 0)
-							semo[i].point_x = 0;
-						else
-							semo[i].point_x = 800;
-						semo[i].point_y = semo[i].y;
-						semo[i].move_x = go_x * 50 + 25;
-						semo[i].move_y = 575 - go_y * 50;
-						semo[i].move_count = 0;
+						//넌 어디로 날라갈레 삼각형아?
+						int go_x = -1;
+						for (int i = 0; i < 2; i++)
+						{
+							int go_y = 2;
+							int pass = 1;
+							do
+							{
+								pass = 1;
+								int go_x2 = rand() % 16;
+								while (1)
+								{
+									if (go_x2 != go_x)
+									{
+										go_x = go_x2;
+										break;
+									}
+								}
+								if (block[0][go_x].active != 2)
+								{
+									go_y = 0;
+									pass = 0;
+								}
+								else if (block[1][go_x].active != 2)
+								{
+									go_y = 1;
+									pass = 0;
+								}
+								else if (block[2][go_x].active != 2)
+								{
+									go_y = 2;
+									pass = 0;
+								}
+							} while (pass);
+
+							semo[i].now_x = semo[i].x;
+							semo[i].now_y = semo[i].y;
+							if (i == 0)
+								semo[i].point_x = 0;
+							else
+								semo[i].point_x = 800;
+							semo[i].point_y = semo[i].y;
+							semo[i].move_x = go_x * 50 + 25;
+							semo[i].move_y = 575 - go_y * 50;
+							semo[i].move_count = 0;
+						}
+
+						any.shack = 20;
+						any.semo_you = 3;
+					}
+				}
+				else if (abs(left_y - right_y) > abs(left_x - right_x))//세로 자름
+				{
+					if (abs((left_y - right_y)/(left_x - right_x))>4)
+					{
+						nemo.active = 0;
+						semo[0].active = 1;
+						semo[1].active = 1;
+						semo[0].x = nemo.x;
+						semo[1].x = nemo.x;
+						semo[0].y = nemo.y;
+						semo[1].y = nemo.y;
+
+						//넌 어디로 날라갈레 삼각형아?
+						int go_x = -1;
+						for (int i = 0; i < 2; i++)
+						{
+							int go_y = 2;
+							int pass = 1;
+							do
+							{
+								pass = 1;
+								int go_x2 = rand() % 16;
+								while (1)
+								{
+									if (go_x2 != go_x)
+									{
+										go_x = go_x2;
+										break;
+									}
+								}
+								if (block[0][go_x].active != 2)
+								{
+									go_y = 0;
+									pass = 0;
+								}
+								else if (block[1][go_x].active != 2)
+								{
+									go_y = 1;
+									pass = 0;
+								}
+								else if (block[2][go_x].active != 2)
+								{
+									go_y = 2;
+									pass = 0;
+								}
+							} while (pass);
+
+							semo[i].now_x = semo[i].x;
+							semo[i].now_y = semo[i].y;
+							if (i == 0)
+								semo[i].point_x = 0;
+							else
+								semo[i].point_x = 800;
+							semo[i].point_y = semo[i].y;
+							semo[i].move_x = go_x * 50 + 25;
+							semo[i].move_y = 575 - go_y * 50;
+							semo[i].move_count = 0;
+						}
+
+						any.shack = 20;
+						any.semo_you = 4;
 					}
 				}
 			}
@@ -383,6 +580,12 @@ void Mouse(int button, int state, int x, int y)
 						{
 							nemo.active = 1;
 							nemo.y = 600;
+
+							int ch = rand() % 2;
+							if (ch == 1)
+								nemo.ro = 0;
+							else
+								nemo.ro = 45;
 						}
 					}	
 				}
@@ -409,6 +612,12 @@ void Mouse(int button, int state, int x, int y)
 						{
 							nemo.active = 1;
 							nemo.y = 600;
+
+							int ch = rand() % 2;
+							if (ch == 1)
+								nemo.ro = 0;
+							else
+								nemo.ro = 45;
 						}
 					}
 				}
@@ -475,7 +684,30 @@ GLvoid drawScene(GLvoid)
 
 	glPushMatrix();
 	{
-		for (int i = 0; i < 3; i++)
+		if (any.shack != 0)//화면흔들림
+		{
+			if(any.shack > 10)
+				glTranslatef((any.shack - 20) * 2, (any.shack - 20) * 2, 0.0);
+			else
+				glTranslatef((any.shack) * -2, (any.shack) * -2, 0.0);
+		}
+
+		glShadeModel(GL_SMOOTH);//배경그리기
+
+		glBegin(GL_POLYGON);
+		glColor3ub(50, 50, 50);
+		glVertex2f(0, 0);
+		glColor3ub(50, 50, 50);
+		glVertex2f(800, 0);
+		glColor3ub(0, 0, 0);
+		glVertex2f(800, 600);
+		glColor3ub(0, 0, 0);
+		glVertex2f(0, 600);
+		glEnd();
+
+		glShadeModel(GL_FLAT);
+
+		for (int i = 0; i < 3; i++)//블록체우기
 		{
 			for (int j = 0; j < 16; j++)
 			{
@@ -505,14 +737,6 @@ GLvoid drawScene(GLvoid)
 			}
 		}
 
-		if (any.shack != 0)
-		{
-			if(any.shack > 10)
-				glTranslatef((any.shack - 20) * 2, (any.shack - 20) * 2, 0.0);
-			else
-				glTranslatef((any.shack) * -2, (any.shack) * -2, 0.0);
-		}
-
 		glColor3ub(255, 255, 255);
 		glBegin(GL_LINES);
 		glVertex2f(0, 90);
@@ -537,6 +761,7 @@ GLvoid drawScene(GLvoid)
 				{
 					glTranslatef(star[i].x,star[i].y,0);
 					glRotatef(star[i].ro, 0, 0, 1);
+					glScalef(star[i].big, star[i].big, 1);
 
 					glShadeModel(GL_SMOOTH);
 
@@ -550,7 +775,7 @@ GLvoid drawScene(GLvoid)
 					glEnd();
 					glBegin(GL_POLYGON);
 					glColor3ub(any.star_color[0], any.star_color[1], 255);
-					glVertex2f(25, 10);
+					glVertex2f(25, -10);
 					glColor3ub(any.star_color[1], 255, any.star_color[2]);
 					glVertex2f(0, 40);
 					glColor3ub(255, any.star_color[2], any.star_color[0]);
@@ -563,9 +788,9 @@ GLvoid drawScene(GLvoid)
 			glPopMatrix();
 		}
 
-		glColor3ub(255, 255, 255);
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 10; i++)//위에 지나가는 삼각형
 		{
+			glColor3ub(255, 255, any.shine);
 			if (up_tr[i].active == 1)
 			{
 				glPushMatrix();
@@ -583,70 +808,167 @@ GLvoid drawScene(GLvoid)
 			}
 		}
 
-		glPushMatrix();
+		glPushMatrix();//네모그리기
 		{
+			glColor3ub(255, 255, any.shine);
 			if (nemo.active == 1)
 			{
-				glTranslatef(nemo.x, nemo.y, 0.0);
-				glBegin(GL_POLYGON);
-				glVertex2f(-25, -25);
-				glVertex2f(-25, +25);
-				glVertex2f(+25, +25);
-				glVertex2f(+25, -25);
-				glEnd();
+				if (nemo.y > 130)
+				{
+					glTranslatef(nemo.x, nemo.y, 0.0);
+					glRotatef(nemo.ro, 0, 0, 1);
+					glBegin(GL_POLYGON);
+					glVertex2f(-25, -25);
+					glVertex2f(-25, +25);
+					glVertex2f(+25, +25);
+					glVertex2f(+25, -25);
+					glEnd();
+				}
+				else
+				{
+					glTranslatef(nemo.x, nemo.y, 0.0);
+					glRotatef(nemo.ro, 0, 0, 1);
+					glBegin(GL_LINES);
+					glVertex2f(-25, -25);
+					glVertex2f(-25, +25);
+					glVertex2f(-25, +25);
+					glVertex2f(+25, +25);
+					glVertex2f(+25, +25);
+					glVertex2f(+25, -25);
+					glVertex2f(+25, -25);
+					glVertex2f(-25, -25);
+					glEnd();
+				}
 			}
 		}
 		glPopMatrix();
 
 		if (nemo.active == 0)//새세모그리기!!
 		{
+			glColor3ub(255, 255, any.shine);
 			if (any.semo_you == 1)//왼쪽 위 자름
 			{
-				glPushMatrix();
+				if (semo[0].move_count != 100)
 				{
-					glTranslatef(semo[0].x, semo[0].y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(-25, -25);
-					glVertex2f(25, 25);
-					glVertex2f(-25, 25);
-					glEnd();
+					glPushMatrix();
+					{
+						glTranslatef(semo[0].x, semo[0].y, 0.0);
+						glBegin(GL_POLYGON);
+						glVertex2f(-25, -25);
+						glVertex2f(25, 25);
+						glVertex2f(-25, 25);
+						glEnd();
+					}
+					glPopMatrix();
 				}
-				glPopMatrix();
 
-				glPushMatrix();
+				if (semo[1].move_count != 100)
 				{
-					glTranslatef(semo[1].x, semo[1].y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(25, -25);
-					glVertex2f(-25, -25);
-					glVertex2f(25, 25);
-					glEnd();
+					glPushMatrix();
+					{
+						glTranslatef(semo[1].x, semo[1].y, 0.0);
+						glBegin(GL_POLYGON);
+						glVertex2f(25, -25);
+						glVertex2f(-25, -25);
+						glVertex2f(25, 25);
+						glEnd();
+					}
+					glPopMatrix();
 				}
-				glPopMatrix();
 			}
 			else if (any.semo_you == 2)//오른쪽 위 자름
 			{
-				glPushMatrix();
+				if (semo[0].move_count != 100)
 				{
-					glTranslatef(semo[0].x, semo[0].y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(-25, -25);
-					glVertex2f(25, -25);
-					glVertex2f(-25, 25);
-					glEnd();
+					glPushMatrix();
+					{
+						glTranslatef(semo[0].x, semo[0].y, 0.0);
+						glBegin(GL_POLYGON);
+						glVertex2f(-25, -25);
+						glVertex2f(25, -25);
+						glVertex2f(-25, 25);
+						glEnd();
+					}
+					glPopMatrix();
 				}
-				glPopMatrix();
 
-				glPushMatrix();
+				if (semo[1].move_count != 100)
 				{
-					glTranslatef(semo[1].x, semo[1].y, 0.0);
-					glBegin(GL_POLYGON);
-					glVertex2f(25, -25);
-					glVertex2f(-25, 25);
-					glVertex2f(25, 25);
-					glEnd();
+					glPushMatrix();
+					{
+						glTranslatef(semo[1].x, semo[1].y, 0.0);
+						glBegin(GL_POLYGON);
+						glVertex2f(25, -25);
+						glVertex2f(-25, 25);
+						glVertex2f(25, 25);
+						glEnd();
+					}
+					glPopMatrix();
 				}
-				glPopMatrix();
+			}
+			else if (any.semo_you == 3)//가로 자름
+			{
+				if (semo[0].move_count != 100)
+				{
+					glPushMatrix();
+					{
+						glTranslatef(semo[0].x, semo[0].y, 0.0);
+						glRotatef(45, 0, 0, 1);
+						glBegin(GL_POLYGON);
+						glVertex2f(-25, -25);
+						glVertex2f(25, -25);
+						glVertex2f(-25, 25);
+						glEnd();
+					}
+					glPopMatrix();
+				}
+
+				if (semo[1].move_count != 100)
+				{
+					glPushMatrix();
+					{
+						glTranslatef(semo[1].x, semo[1].y, 0.0);
+						glRotatef(45, 0, 0, 1);
+						glBegin(GL_POLYGON);
+						glVertex2f(25, -25);
+						glVertex2f(-25, 25);
+						glVertex2f(25, 25);
+						glEnd();
+					}
+					glPopMatrix();
+				}
+			}
+			else if (any.semo_you == 4)//세로 자름
+			{
+				if (semo[0].move_count != 100)
+				{
+					glPushMatrix();
+					{
+						glTranslatef(semo[0].x, semo[0].y, 0.0);
+						glRotatef(-45, 0, 0, 1);
+						glBegin(GL_POLYGON);
+						glVertex2f(-25, -25);
+						glVertex2f(25, -25);
+						glVertex2f(-25, 25);
+						glEnd();
+					}
+					glPopMatrix();
+				}
+
+				if (semo[1].move_count != 100)
+				{
+					glPushMatrix();
+					{
+						glTranslatef(semo[1].x, semo[1].y, 0.0);
+						glRotatef(-45, 0, 0, 1);
+						glBegin(GL_POLYGON);
+						glVertex2f(25, -25);
+						glVertex2f(-25, 25);
+						glVertex2f(25, 25);
+						glEnd();
+					}
+					glPopMatrix();
+				}
 			}
 		}
 
