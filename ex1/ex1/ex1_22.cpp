@@ -30,23 +30,146 @@ int pro_ro;
 
 float ball[3];
 float ball_ro[3];
+int ball_go = 0;//0부터 상하좌우
 
 
 int d[3];//하부 좌표
 int d_ro[3];
 int m_ro[3];
 int u_ro[3];
+int d_go = 2;//0부터 상하좌우
 
 
 void SetupRC()
 {
-
+	ball[2] = -100;
+	d[2] = 100;
 
 	srand(time(NULL));
 }
 
 void Timer(int value)
 {
+	//자동이동
+	switch (ball_go)
+	{
+	case 0:
+		if (ball[2] >= -300)
+		{
+			if (((ball[0] < -120 || ball[0] > 120) && ball[2] <= -120) || (ball[2] - 50 < d[]))
+				ball_go = rand() % 4;
+			else
+			{
+				ball[2] -= 5;
+				ball_ro[0] -= 5;
+			}
+		}
+		else
+			ball_go = rand() % 4;
+		break;
+
+	case 1:
+		if (ball[2] <= 300)
+		{
+			if ((ball[0] < -120 || ball[0] > 120) && ball[2] >= 120)
+				ball_go = rand() % 4;
+			else
+			{
+				ball[2] += 5;
+				ball_ro[0] += 5;
+			}
+		}
+		else
+			ball_go = rand() % 4;
+		break;
+
+	case 2:
+		if (ball[0] >= -300)
+		{
+			if ((ball[2] < -120 || ball[2] > 120) && ball[0] <= -120)
+				ball_go = rand() % 4;
+			else
+			{
+				ball[0] -= 5;
+				ball_ro[2] -= 5;
+			}
+		}
+		else
+			ball_go = rand() % 4;
+		break;
+
+	case 3:
+		if (ball[0] <= 300)
+		{
+			if ((ball[2] < -120 || ball[2] > 120) && ball[0] >= 120)
+				ball_go = rand() % 4;
+			else
+			{
+				ball[0] += 5;
+				ball_ro[2] += 5;
+			}
+		}
+		else
+			ball_go = rand() % 4;
+		break;
+	}
+
+	switch (d_go)
+	{
+	case 0:
+		if (d[2] >= -300)
+		{
+			if((d[0] < -120 || d[0] > 120) && d[2] <= -120)
+				d_go = rand() % 4;
+			else
+				d[2] -= 5;
+		}
+		else
+			d_go = rand() % 4;
+		break;
+
+	case 1:
+		if (d[2] <= 300)
+		{
+			if ((d[0] < -120 || d[0] > 120) && d[2] >= 120)
+				d_go = rand() % 4;
+			else
+				d[2] += 5;
+		}
+		else
+			d_go = rand() % 4;
+		break;
+
+	case 2:
+		if (d[0] >= -300)
+		{
+			if ((d[2] < -120 || d[2] > 120) && d[0] <= -120)
+				d_go = rand() % 4;
+			else
+				d[0] -= 5;
+		}
+		else
+			d_go = rand() % 4;
+		break;
+
+	case 3:
+		if (d[0] <= 300)
+		{
+			if ((d[2] < -120 || d[2] > 120) && d[0] >= 120)
+				d_go = rand() % 4;
+			else
+				d[0] += 5;
+		}
+		else
+			d_go = rand() % 4;
+		break;
+	}
+
+	
+
+
+
+
 	if (tree_sw == 0 && tree_big < 80)
 		tree_big++;
 	else if (tree_big == 80)
@@ -128,42 +251,30 @@ void Keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'a':
-		if (ball[0] > -300)
-			ball[0] -= 5;
-		ball_ro[0] -= 5;
+		ball_go = 2;
 		break;
 	case 'd':
-		if (ball[0] < 300)
-			ball[0] += 5;
-		ball_ro[0] += 5;
+		ball_go = 3;
 		break;
 	case 'w':
-		if (ball[2] > -300)
-			ball[2] -= 5;
-		ball_ro[2] -= 5;
+		ball_go = 0;
 		break;
 	case 's':
-		if (ball[2] < 300)
-			ball[2] += 5;
-		ball_ro[2] += 5;
+		ball_go = 1;
 		break;
 
 
 	case 'f':
-		if (d[0] > -300)
-			d[0] -= 5;
+		d_go = 2;
 		break;
 	case 'h':
-		if (d[0] < 300)
-			d[0] += 5;
+		d_go = 3;
 		break;
 	case 't':
-		if (d[2] > -300)
-			d[2] -= 5;
+		d_go = 0;
 		break;
 	case 'g':
-		if (d[2] < 300)
-			d[2] += 5;
+		d_go = 1;
 		break;
 
 	case 'z':

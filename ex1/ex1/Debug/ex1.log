@@ -1,25 +1,25 @@
 ﻿  ex1_22.cpp
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(45): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(230): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(265): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(310): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(311): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(312): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(320): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(321): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(331): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(332): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(345): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(346): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(421): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(502): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(552): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(564): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(604): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(662): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(671): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(683): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(699): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(708): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(716): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(48): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(353): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(388): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(433): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(434): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(435): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(443): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(444): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(454): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(455): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(468): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(469): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(544): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(625): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(675): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(687): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(727): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(785): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(794): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(806): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(822): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(831): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_22.cpp(839): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ex1.vcxproj -> C:\Users\rnrjs\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
