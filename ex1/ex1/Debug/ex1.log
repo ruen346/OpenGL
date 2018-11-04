@@ -1,28 +1,9 @@
-﻿  ex1_17(카메라).cpp
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(41): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(45): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(49): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(53): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(57): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(61): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(128): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(190): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(192): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(196): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(203): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(205): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(209): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(224): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(226): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(230): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(237): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(239): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(243): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(258): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(260): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(264): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(271): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(273): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_17(카메라).cpp(277): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ex1.vcxproj -> C:\Users\구건모\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
+﻿  ex1_25.cpp
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(28): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(124): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(168): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(226): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(284): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(306): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_25.cpp(308): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ex1.vcxproj -> C:\Users\rnrjs\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
