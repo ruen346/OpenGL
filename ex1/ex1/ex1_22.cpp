@@ -50,13 +50,48 @@ void SetupRC()
 
 void Timer(int value)
 {
+	if (abs(ball[0] - d[0]) < 65 && abs(ball[2] - d[2]) < 65)
+	{
+		switch (ball_go)
+		{
+		case 0:
+			ball_go = 1;
+			break;
+		case 1:
+			ball_go = 0;
+			break;
+		case 2:
+			ball_go = 3;
+			break;
+		case 3:
+			ball_go = 2;
+			break;
+		}
+
+		switch (d_go)
+		{
+		case 0:
+			d_go = 1;
+			break;
+		case 1:
+			d_go = 0;
+			break;
+		case 2:
+			d_go = 3;
+			break;
+		case 3:
+			d_go = 2;
+			break;
+		}
+	}
+
 	//자동이동
 	switch (ball_go)
 	{
 	case 0:
 		if (ball[2] >= -300)
 		{
-			if (((ball[0] < -120 || ball[0] > 120) && ball[2] <= -120) || (ball[2] - 50 < d[]))
+			if (((ball[0] < -120 || ball[0] > 120) && ball[2] <= -120))
 				ball_go = rand() % 4;
 			else
 			{
@@ -457,7 +492,7 @@ void drawScene()
 			glRotatef(u_ro[2], 0, 1, 0);
 			glTranslatef(0, -30, 0);
 
-			glPushMatrix();//하부
+			glPushMatrix();//상부
 			{
 				glTranslatef(0, 40, 0);
 				glColor3f(0, 0, 1);
