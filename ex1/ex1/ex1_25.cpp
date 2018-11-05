@@ -271,8 +271,8 @@ void drawScene()
 			glVertex3f(50, 100, -50);
 			glColor3ub(0, 0, 0);
 			glVertex3f(50, 0, -50);
-			glVertex3f(-50, 0, -50);
 			glColor3ub(255, 255, 0);
+			glVertex3f(-50, 0, -50);
 			glColor3ub(0, 255, 255);
 			glVertex3f(-50, 100, -50);
 
