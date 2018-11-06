@@ -10,48 +10,351 @@ GLUquadricObj *glu_fill;
 GLUquadricObj *glu_line;
 
 int y_ro = 0;
+int z_ro = 0;
 
-int option1 = 0;//Àº¸é off/on
-int option2 = 0;//ÄÃ¸µ off/on
-int option3 = 0;//½¦ÀÌµù flat/smooth
+int ball_x[5];
+int ball_y[5];
+int ball_z[5];
+int ball_go[5];
 
-int open1 = 0;//1ÀÌ¸é À§¶Ñ²±¿°
-int open2 = 0;//1ÀÌ¸é ¾Õ¶Ñ²±¿°
-int open1_ro = 0;
-int open2_ro = 0;
-float open1_up = 1;
-float open2_up = 0;
+int cube_x[3];
+int cube_y[3];
+int cube_z[3];
+int cube_ro[3];//¾Æ·¡0 ¿ÞÂÊ1 À§2 ¿À¸¥ÂÊ3
+
 
 void SetupRC()
 {
+	for (int i = 0; i < 5; i++)
+	{
+		ball_x[i] = (rand() % 100) - 50;
+		ball_y[i] = (rand() % 100) - 50;
+		ball_z[i] = (rand() % 100) - 50;
+		ball_go[i] = rand() % 4;
+	}
+
+	cube_y[0] = -100 + 15;
+	cube_y[1] = -100 + 10;
+	cube_y[2] = -100 + 5;
+	cube_z[0] = -15;
+	cube_z[1] = 10;
+	cube_z[2] = 25;
 
 	srand(time(NULL));
 }
 
 void Timer(int value)
 {
-	if (open1 == 1 && open1_ro < 90)
-		open1_ro += 2;
-	else if (open1 == 1 && open1_ro == 90 && open1_up < 6)
-		open1_up += 0.25;
+	if (z_ro < 0)
+		z_ro += 360;
+	else if (z_ro > 360)
+		z_ro -= 360;
 
-	if (open1 == 0 && open1_ro == 90 && open1_up > 1)
-		open1_up -= 0.25;
-	else if (open1 == 0 && open1_ro > 0)
-		open1_ro -= 2;
+	for (int i = 0; i < 5; i++)
+	{
+		switch (ball_go[i])
+		{
+		case 0:
+			if (ball_x[i] < 90)
+			{
+				ball_x[i] += 5;
+				ball_y[i] -= 5;
+			}
+			else
+				ball_go[i] = 1;
+			break;
+
+		case 1:
+			if (ball_y[i] > -90)
+			{
+				ball_x[i] -= 5;
+				ball_y[i] -= 5;
+			}
+			else
+				ball_go[i] = 2;
+			break;
+
+		case 2:
+			if (ball_x[i] > -90)
+			{
+				ball_x[i] -= 5;
+				ball_y[i] += 5;
+			}
+			else
+				ball_go[i] = 3;
+			break;
+
+		case 3:
+			if (ball_y[i] < 90)
+			{
+				ball_x[i] += 5;
+				ball_y[i] += 5;
+			}
+			else
+				ball_go[i] = 0;
+			break;
+		}
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (cube_ro[i] == 0)
+		{
+			if (z_ro <= 90 && z_ro >= 45)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_x[i] > -85)
+						cube_x[i] -= 5;
+					break;
+				case 1:
+					if (cube_x[i] > -90)
+						cube_x[i] -= 5;
+					break;
+				case 2:
+					if (cube_x[i] > -95)
+						cube_x[i] -= 5;
+					break;
+				}	
+			}
+			else if (z_ro >= 270 && z_ro <= 315)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_x[i] < 85)
+						cube_x[i] += 5;
+					break;
+				case 1:
+					if (cube_x[i] < 90)
+						cube_x[i] += 5;
+					break;
+				case 2:
+					if (cube_x[i] < 95)
+						cube_x[i] += 5;
+					break;
+				}
+			}
+			else if (z_ro > 90 && z_ro <= 135)
+				cube_ro[i] = 1;
+			else if (z_ro < 270 && z_ro >= 225)
+				cube_ro[i] = 3;
+			else if(z_ro > 135 && z_ro < 225)
+				cube_ro[i] = 2;
 
 
-	if (open2 == 1 && open2_ro < 90)
-		open2_ro += 2;
-	else if (open2 == 1 && open2_ro == 90 && open2_up < 6)
-		open2_up += 0.25;
+			//¼öÁ÷³«¤¡¤¡¤¡ÇÏ
+			switch (i)
+			{
+			case 0:
+				if (cube_y[i] > -85)
+					cube_y[i] -= 5;
+				break;
+			case 1:
+				if (cube_y[i] > -90)
+					cube_y[i] -= 5;
+				break;
+			case 2:
+				if (cube_y[i] > -95)
+					cube_y[i] -= 5;
+				break;
+			}
+		}
 
-	if (open2 == 0 && open2_ro == 90 && open2_up > 0)
-		open2_up -= 0.25;
-	else if (open2 == 0 && open2_ro > 0)
-		open2_ro -= 2;
+		if (cube_ro[i] == 1)
+		{
+			if (z_ro >= 0 && z_ro <= 45)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_y[i] > -85)
+						cube_y[i] -= 5;
+					break;
+				case 1:
+					if (cube_y[i] > -90)
+						cube_y[i] -= 5;
+					break;
+				case 2:
+					if (cube_y[i] > -95)
+						cube_y[i] -= 5;
+					break;
+				}
+			}
+			else if (z_ro <= 180 && z_ro >= 135)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_y[i] < 85)
+						cube_y[i] += 5;
+					break;
+				case 1:
+					if (cube_y[i] < 90)
+						cube_y[i] += 5;
+					break;
+				case 2:
+					if (cube_y[i] < 95)
+						cube_y[i] += 5;
+					break;
+				}
+			}
+			else if (z_ro > 180 && z_ro <= 225)
+				cube_ro[i] = 2;
+			else if (z_ro < 360 && z_ro >= 315)
+				cube_ro[i] = 0;
+			else if (z_ro > 225 && z_ro < 315)
+				cube_ro[i] = 3;
 
 
+			//¼öÁ÷³«¤¡¤¡¤¡ÇÏ
+			switch (i)
+			{
+			case 0:
+				if (cube_x[i] > -85)
+					cube_x[i] -= 5;
+				break;
+			case 1:
+				if (cube_x[i] > -90)
+					cube_x[i] -= 5;
+				break;
+			case 2:
+				if (cube_x[i] > -95)
+					cube_x[i] -= 5;
+				break;
+			}
+		}
+
+		if (cube_ro[i] == 2)
+		{
+			if (z_ro <= 270 && z_ro >= 225)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_x[i] < 85)
+						cube_x[i] += 5;
+					break;
+				case 1:
+					if (cube_x[i] < 90)
+						cube_x[i] += 5;
+					break;
+				case 2:
+					if (cube_x[i] < 95)
+						cube_x[i] += 5;
+					break;
+				}
+			}
+			else if (z_ro >= 90 && z_ro <= 125)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_x[i] > -85)
+						cube_x[i] -= 5;
+					break;
+				case 1:
+					if (cube_x[i] > -90)
+						cube_x[i] -= 5;
+					break;
+				case 2:
+					if (cube_x[i] > -95)
+						cube_x[i] -= 5;
+					break;
+				}
+			}
+			
+			else if (z_ro > 270 && z_ro <= 315)
+				cube_ro[i] = 3;
+			else if (z_ro < 90 && z_ro >= 45)
+				cube_ro[i] = 1;
+			else if (z_ro < 45 || z_ro > 315)
+				cube_ro[i] = 2;
+		
+
+			//¼öÁ÷³«¤¡¤¡¤¡ÇÏ
+			switch (i)
+			{
+			case 0:
+				if (cube_y[i] < 85)
+					cube_y[i] += 5;
+				break;
+			case 1:
+				if (cube_y[i] < 90)
+					cube_y[i] += 5;
+				break;
+			case 2:
+				if (cube_y[i] < 95)
+					cube_y[i] += 5;
+				break;
+			}
+		}
+
+		if (cube_ro[i] == 3)
+		{
+			if (z_ro >= 180 && z_ro <= 225)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_y[i] < 85)
+						cube_y[i] += 5;
+					break;
+				case 1:
+					if (cube_y[i] < 90)
+						cube_y[i] += 5;
+					break;
+				case 2:
+					if (cube_y[i] < 95)
+						cube_y[i] += 5;
+					break;
+				}
+			}
+			else if (z_ro <= 360 && z_ro >= 315)
+			{
+				switch (i)
+				{
+				case 0:
+					if (cube_y[i] > -85)
+						cube_y[i] -= 5;
+					break;
+				case 1:
+					if (cube_y[i] > -90)
+						cube_y[i] -= 5;
+					break;
+				case 2:
+					if (cube_y[i] > -95)
+						cube_y[i] -= 5;
+					break;
+				}
+			}
+			else if (z_ro > 0 && z_ro <= 45)
+				cube_ro[i] = 0;
+			else if (z_ro < 180 && z_ro >= 135)
+				cube_ro[i] = 2;
+			else if (z_ro > 45 && z_ro < 135)
+				cube_ro[i] = 1;
+
+
+			//¼öÁ÷³«¤¡¤¡¤¡ÇÏ
+			switch (i)
+			{
+			case 0:
+				if (cube_x[i] < 85)
+					cube_x[i] += 5;
+				break;
+			case 1:
+				if (cube_x[i] < 90)
+					cube_x[i] += 5;
+				break;
+			case 2:
+				if (cube_x[i] < 95)
+					cube_x[i] += 5;
+				break;
+			}
+		}
+	}
 
 	glutPostRedisplay();
 	glutTimerFunc(20, Timer, 1);
@@ -61,47 +364,20 @@ void Keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case '[':
+	case 'y':
 		y_ro += 5;
 		break;
 
-	case ']':
+	case 'Y':
 		y_ro -= 5;
 		break;
 
-	case '1':
-		if (option1 == 0)
-			option1 = 1;
-		else
-			option1 = 0;
+	case 'z':
+		z_ro += 5;
 		break;
 
-	case '2':
-		if (option2 == 0)
-			option2 = 1;
-		else
-			option2 = 0;
-		break;
-
-	case '3':
-		if (option3 == 0)
-			option3 = 1;
-		else
-			option3 = 0;
-		break;
-
-	case 'q':
-		if (open1 == 0)
-			open1 = 1;
-		else
-			open1 = 0;
-		break;
-
-	case 'w':
-		if (open2 == 0)
-			open2 = 1;
-		else
-			open2 = 0;
+	case 'Z':
+		z_ro -= 5;
 		break;
 	}
 }
@@ -110,13 +386,16 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-
+		
 	}
 }
 
 void Motion(int x, int y)
 {
-
+	if (x < 350)
+		z_ro ++;
+	if (x > 450)
+		z_ro --;
 }
 
 
@@ -140,15 +419,9 @@ void main(int argc, char *argv[])
 
 void drawScene()
 {
-	if (option1 == 1)
-		glEnable(GL_DEPTH_TEST);
-	else if (option1 == 0)
-		glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
-	if (option2 == 1)
-		glEnable(GL_CULL_FACE);
-	else if (option2 == 0)
-		glDisable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -164,161 +437,93 @@ void drawScene()
 			0.0, 0.0, -1.0, //AT
 			0.0, 1.0, 0.0); //UP
 
-		glTranslatef(0, -100, 0);
 		glRotatef(y_ro, 0, 1, 0);
-
-		/*
-		glPushMatrix();//ÆÇ
-		{
-			glColor3ub(255, 100, 100);
-			glBegin(GL_POLYGON);
-			glVertex3f(-300, 0, -300);
-			glVertex3f(0, 0, -300);
-			glVertex3f(-300, 0, 0);
-			glEnd();
-
-			glColor3ub(100, 255, 100);
-			glBegin(GL_POLYGON);
-			glVertex3f(0, 0, -300);
-			glVertex3f(300, 0, -300);
-			glVertex3f(300, 0, 0);
-			glEnd();
-
-			glColor3ub(100, 100, 255);
-			glBegin(GL_POLYGON);
-			glVertex3f(-300, 0, 0);
-			glVertex3f(-300, 0, 300);
-			glVertex3f(0, 0, 300);
-			glEnd();
-
-			glColor3ub(100, 100, 100);
-			glBegin(GL_POLYGON);
-			glVertex3f(300, 0, 0);
-			glVertex3f(300, 0, 300);
-			glVertex3f(0, 0, 300);
-			glEnd();
-
-			glColor3ub(255, 255, 255);
-			glBegin(GL_POLYGON);
-			glVertex3f(0, 0, -300);
-			glVertex3f(-300, 0, 0);
-			glVertex3f(0, 0, 300);
-			glVertex3f(300, 0, 0);
-			glEnd();
-		}
-		glPopMatrix();
-		*/
-
+		glRotatef(z_ro, 0, 0, 1);
+		
 		glPushMatrix();
 		{
-			glTranslatef(0, 50, 0);
-			glRotatef(30, 1, 0, 0);
-			glRotatef(45, 0, 1, 0);
-
-			if (option3 == 0)
-				glShadeModel(GL_FLAT);
-			else if (option3 == 1)
-				glShadeModel(GL_SMOOTH);
-
-			glPushMatrix();
-			{
-				glTranslatef(0, 100, -50);
-				glRotatef(-open1_ro, 1, 0, 0);
-
-				glBegin(GL_QUADS);
-				glColor3ub(0, 255, 255);//À§
-				glVertex3f(-50, 0, 0);
-				glColor3ub(255, 0, 255);
-				glVertex3f(-50, 0, 100);
-				glColor3ub(255, 255, 255);
-				glVertex3f(50, 0, 100);
-				glColor3ub(255, 255, 0);
-				glVertex3f(50, 0, 0);
-				glEnd();
-			}
-			glPopMatrix();
-
-			glBegin(GL_QUADS);
-
-			glColor3ub(0, 0, 0);//¾Æ·¡
-			glVertex3f(50, 0, -50);
-			glColor3ub(0, 0, 255);
-			glVertex3f(50, 0, 50);
-			glColor3ub(0, 255, 0);
-			glVertex3f(-50, 0, 50);
-			glColor3ub(255, 0, 0);
-			glVertex3f(-50, 0, -50);
-
-			glColor3ub(0, 255, 255);//¿ÞÂÊ
-			glVertex3f(-50, 100, -50);
-			glColor3ub(255, 0, 0);
-			glVertex3f(-50, 0, -50);
-			glColor3ub(0, 255, 0);
-			glVertex3f(-50, 0, 50);
-			glColor3ub(255, 0, 255);
-			glVertex3f(-50, 100, 50);
-
-			glColor3ub(255, 255, 255);//¿À¸¥ÂÊ
-			glVertex3f(50, 100, 50);
-			glColor3ub(0, 0, 255);
-			glVertex3f(50, 0, 50);
-			glColor3ub(0, 0, 0);
-			glVertex3f(50, 0, -50);
-			glColor3ub(255, 255, 0);
-			glVertex3f(50, 100, -50);
-
-			glColor3ub(255, 0, 0);//µÚ
-			glVertex3f(50, 100, -50);
-			glColor3ub(0, 0, 0);
-			glVertex3f(50, 0, -50);
-			glColor3ub(255, 255, 0);
-			glVertex3f(-50, 0, -50);
-			glColor3ub(0, 255, 255);
-			glVertex3f(-50, 100, -50);
-
+			glBegin(GL_QUADS);//À­¸é
+			glColor3ub(30, 30, 30);
+			glVertex3f(-100, 100, -100);
+			glVertex3f(100, 100, -100);
+			glVertex3f(100, 100, 100);
+			glVertex3f(-100, 100, 100);
 			glEnd();
 
-			glPushMatrix();
-			{
-				glTranslatef(0, 100, 50);
-				glRotatef(-open2_ro, 1, 0, 0);
-
-				glBegin(GL_QUADS);
-
-				glColor3ub(255, 0, 255);//¾Õ
-				glVertex3f(-50, 0, 0);
-				glColor3ub(0, 255, 0);
-				glVertex3f(-50, -100, 0);
-				glColor3ub(0, 0, 255);
-				glVertex3f(50, -100, 0);
-				glColor3ub(255, 255, 255);
-				glVertex3f(50, 0, 0);
-				glEnd();
-			}
-			glPopMatrix();
-
-
-			glColor3ub(255, 255, 255);
-			float rad = 45;
-			glBegin(GL_LINES);
-			for (float i = 0; i < 359; i++)
-			{
-				float angle = i * 6.28 / 30;
-				glVertex3f(rad*cos(angle), i / 8 * open1_up, rad*sin(angle));
-				angle = (i + 1) * 6.28 / 30;
-				glVertex3f(rad*cos(angle), (i + 1) / 8 * open1_up, rad*sin(angle));
-			}
+			glBegin(GL_QUADS);//¾Æ·¡¸é
+			glColor3ub(100, 100, 100);
+			glVertex3f(-100, -100, 100);
+			glVertex3f(100, -100, 100);
+			glVertex3f(100, -100, -100);
+			glVertex3f(-100, -100, -100);
 			glEnd();
 
-			glPushMatrix();
-			{
-				glTranslatef(0, 360 / 8 * open1_up, 50 * open2_up);
-				glColor3ub(200, 200, 200);
-				gluSphere(glu_fill, 40, 30, 30);
-			}
-			glPopMatrix();
+			glBegin(GL_QUADS);//¾Õ¸é
+			glColor3ub(70, 70, 70);
+			glVertex3f(-100, 100, 100);
+			glVertex3f(100, 100, 100);
+			glVertex3f(100, -100, 100);
+			glVertex3f(-100, -100, 100);
+			glEnd();
 
-			glShadeModel(GL_FLAT);
+			glBegin(GL_QUADS);//µÞ¸é
+			glColor3ub(50, 50, 50);
+			glVertex3f(-100, 100, -100);
+			glVertex3f(-100, -100, -100);
+			glVertex3f(100, -100, -100);
+			glVertex3f(100, 100, -100);
+			glEnd();
+
+			glBegin(GL_QUADS);//¿Þ¸é
+			glColor3ub(150, 150, 150);
+			glVertex3f(-100, -100, -100);
+			glVertex3f(-100, 100, -100);
+			glVertex3f(-100, 100, 100);
+			glVertex3f(-100, -100, 100);
+			glEnd();
+
+			glBegin(GL_QUADS);//¿À¸¥¸é
+			glColor3ub(120, 120, 120);
+			glVertex3f(100, -100, -100);
+			glVertex3f(100, -100, 100);
+			glVertex3f(100, 100, 100);
+			glVertex3f(100, 100, -100);
+			glEnd();
+
+			for (int i = 0; i < 5; i++)//°øµé
+			{
+				glPushMatrix();
+				{
+					glTranslatef(ball_x[i], ball_y[i], ball_z[i]);
+					glColor3ub(255, 191, 248);
+					gluSphere(glu_fill, 10, 10, 10);
+				}
+				glPopMatrix();
+			}
+
+			for (int i = 0; i < 3; i++)//»ç°¢Çüµé
+			{
+				glPushMatrix();
+				{
+					glTranslatef(cube_x[i], cube_y[i], cube_z[i]);
+					if (i == 0)
+					{
+						glColor3ub(155, 90, 61);
+						glutSolidCube(30);
+					}
+					else if (i == 1)
+					{
+						glColor3ub(142, 246, 238);
+						glutSolidCube(20);
+					}
+					else if (i == 2)
+					{
+						glColor3ub(158, 162, 255);
+						glutSolidCube(10);
+					}
+				}
+				glPopMatrix();
+			}
 		}
 		glPopMatrix();
 	}
@@ -333,7 +538,7 @@ void Reshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60.0, 1.0, 1.0, 1000.0);
-	glTranslatef(0.0, 0.0, -500.0);
+	glTranslatef(0.0, 0.0, -300.0);
 
 	glMatrixMode(GL_MODELVIEW);
 }
