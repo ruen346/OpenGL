@@ -1,2 +1,62 @@
-﻿  LINK : C:\Users\rnrjs\Desktop\개발\OpenGL\homework1\Debug\homework1.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+﻿  구건모.cpp
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(98): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(99): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(177): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(184): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(225): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(226): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(259): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(260): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(261): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(262): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(269): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(270): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(275): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(276): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(329): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(379): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(380): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(384): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(386): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(388): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(390): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(426): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(476): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(477): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(481): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(487): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(512): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(562): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(563): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(567): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(569): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(571): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(573): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(595): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(645): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(646): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(650): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(652): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(654): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(656): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(742): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(743): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(748): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(749): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(753): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(754): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(759): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(762): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(765): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(800): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(802): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(826): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(875): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(876): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(880): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(881): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(892): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(928): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(948): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\homework1\homework1\구건모.cpp(959): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   homework1.vcxproj -> C:\Users\rnrjs\Desktop\개발\OpenGL\homework1\Debug\homework1.exe
