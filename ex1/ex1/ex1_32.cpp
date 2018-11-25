@@ -9,38 +9,36 @@ GLvoid Reshape(int w, int h);
 GLUquadricObj *glu_fill;
 GLUquadricObj *glu_line;
 
+int y_ro = 0;
+
 int light_active[2];
-int light_ro_active;
-float light_ro[2];
+float light0[2];
 float light1[2];
 float light2[2];
+
+int ball_turn = 0;
+
+int on = 0;
 
 
 void SetupRC()
 {
-	light1[0] = 2.5;
-	light1[1] = 2.5;
-	light2[0] = 0.5;
-	light2[1] = 0.5;
-	light_ro[1] = 180;
+	light0[0] = 0.1;
+	light0[1] = 0.1;
+	light1[0] = 0.5;
+	light1[1] = 0.5;
+	light2[0] = 0.2;
+	light2[1] = 0.2;
 
 	srand(time(NULL));
 }
 
 void Timer(int value)
 {
-	if (light_ro_active == 1)
-	{
-		if (light_ro[0] < 350)
-			light_ro[0] += 5;
-		else
-			light_ro[0] = 0;
-
-		if (light_ro[1] < 350)
-			light_ro[1] += 5;
-		else
-			light_ro[1] = 0;
-	}
+	if (ball_turn < 350)
+		ball_turn += 10;
+	else
+		ball_turn = 0;
 
 	glutPostRedisplay();
 	glutTimerFunc(20, Timer, 1);
@@ -50,6 +48,13 @@ void Keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+	case 'y':
+		y_ro += 5;
+		break;
+	case 'Y':
+		y_ro -= 5;
+		break;
+
 	case '1':
 		if (light_active[0] == 0)
 			light_active[0] = 1;
@@ -64,42 +69,36 @@ void Keyboard(unsigned char key, int x, int y)
 			light_active[1] = 0;
 		break;
 
-	case 'y':
-		if (light_ro[0] < 350)
-			light_ro[0] += 10;
-		else
-			light_ro[0] = 0;
-
-		if (light_ro[1] < 350)
-			light_ro[1] += 10;
-		else
-			light_ro[1] = 0;
-		break;
-
 	case 'a':
-		if (light_ro_active == 0)
-			light_ro_active = 1;
-		else
-			light_ro_active = 0;
+		light0[0] += 0.1;
+		light0[1] += 0.1;
 		break;
-
+	case 'A':
+		light0[0] -= 0.1;
+		light0[1] -= 0.1;
+		break;
 	case 'd':
-		light1[0] += 0.2;
-		light1[1] += 0.2;
+		light1[0] += 0.1;
+		light1[1] += 0.1;
 		break;
 	case 'D':
-		light1[0] -= 0.2;
-		light1[1] -= 0.2;
+		light1[0] -= 0.1;
+		light1[1] -= 0.1;
 		break;
-
 	case 's':
-		light2[0] += 0.2;
-		light2[1] += 0.2;
+		light2[0] += 0.1;
+		light2[1] += 0.1;
 		break;
 	case 'S':
-		light2[0] -= 0.2;
-		light2[1] -= 0.2;
+		light2[0] -= 0.1;
+		light2[1] -= 0.1;
 		break;
+
+	case 'o':
+		if (on == 1)
+			on = 0;
+		else
+			on = 1;
 	}
 }
 
@@ -146,31 +145,138 @@ void drawScene()
 	gluQuadricDrawStyle(glu_fill, GLU_FILL);
 	gluQuadricDrawStyle(glu_line, GLU_LINE);
 
+
 	glPushMatrix();
 	{
 		gluLookAt(
-			0.0, 0.0, 0.0, //EYE
-			0.0, 0.0, -1.0, //AT
+			0.0, 100.0, 100.0, //EYE
+			0.0, 0.0, 0.0, //AT
 			0.0, 1.0, 0.0); //UP
+
+		glRotatef(y_ro, 0, 1, 0);
 
 
 		glPushMatrix();//공
 		{
-			glColor3ub(50, 50, 50);
+			glColor3ub(255, 255, 30);
 			gluSphere(glu_fill, 50.0, 20, 20);
 		}
 		glPopMatrix();
 
+		glPushMatrix();//판
+		{
+			glColor3ub(200, 200, 200);
+			glScalef(400, 1, 400);
+			glutSolidCube(1);
+		}
+		glPopMatrix();
+
+		glPushMatrix();
+		{
+			glTranslated(-200, 0, -200);
+			glColor3ub(50, 50, 50);
+			glRotatef(-90, 1, 0, 0);
+			gluCylinder(glu_fill, 20, 0, 20, 4, 10);
+		}
+		glPopMatrix();
+
+		glPushMatrix();
+		{
+			glTranslated(200, 0, -200);
+			glColor3ub(50, 50, 50);
+			glRotatef(-90, 1, 0, 0);
+			gluCylinder(glu_fill, 20, 0, 20, 4, 10);
+		}
+		glPopMatrix();
+
+		glPushMatrix();
+		{
+			glTranslated(200, 0, 200);
+			glColor3ub(50, 50, 50);
+			glRotatef(-90, 1, 0, 0);
+			gluCylinder(glu_fill, 20, 0, 20, 4, 10);
+		}
+		glPopMatrix();
+
+		glPushMatrix();
+		{
+			glTranslated(-200, 0, 200);
+			glColor3ub(50, 50, 50);
+			glRotatef(-90, 1, 0, 0);
+			gluCylinder(glu_fill, 20, 0, 20, 4, 10);
+		}
+		glPopMatrix();
+
+
+		glPushMatrix();//중앙기둥
+		{
+			glColor3ub(150, 150, 150);
+			
+			if (on == 1)
+			{
+				glEnable(GL_AUTO_NORMAL);
+				glNormal3f(0.0, 150.0, 0.0);
+			}
+			else
+				glDisable(GL_AUTO_NORMAL);
+
+			glBegin(GL_QUADS);
+			glVertex3f(0, 200, 0);//시작
+			glVertex3f(100, 0, 100);
+			glVertex3f(-100, 0, 100);
+			glVertex3f(0, 200, 0);
+			glEnd();
+
+			glBegin(GL_QUADS);
+			glVertex3f(0, 200, 0);//시작
+			glVertex3f(100, 0, -100);
+			glVertex3f(100, 0, 100);
+			glVertex3f(0, 200, 0);
+			glEnd();
+
+			glBegin(GL_QUADS);
+			glVertex3f(0, 200, 0);//시작
+			glVertex3f(-100, 0, -100);
+			glVertex3f(100, 0, -100);
+			glVertex3f(0, 200, 0);
+			glEnd();
+
+			glBegin(GL_QUADS);
+			glVertex3f(0, 200, 0);//시작
+			glVertex3f(-100, 0, 100);
+			glVertex3f(-100, 0, -100);
+			glVertex3f(0, 200, 0);
+			glEnd();
+		}
+		glPopMatrix();
+
+		glPushMatrix();//좌측빛
+		{
+			glTranslatef(-250, 200, 0);
+			glColor3ub(150,150,255);
+			glRotatef(-90, 0, 1, 0);
+			gluCylinder(glu_fill, 10, 0.0, 20, 20, 8);
+		}
+		glPopMatrix();
+
+		glPushMatrix();//우측빛
+		{
+			glTranslatef(250, 200, 0);
+			glColor3ub(255, 150, 150);
+			glRotatef(90, 0, 1, 0);
+			gluCylinder(glu_fill, 10, 0.0, 20, 20, 8);
+		}
+		glPopMatrix();
 
 		glEnable(GL_COLOR_MATERIAL);
 		glEnable(GL_LIGHTING);
 
 
 
-		GLfloat AmbientLight[] = { 0.1f, 0.1f, 0.1f, 0.0f };//주변 조명
-		GLfloat DiffuseLight[] = { light1[0], light1[0], 0.0, 0.0f };//산란 반사 조명
-		GLfloat SpecularLight[] = { light2[0], light2[0], 0.0, 0.0f };//거울반사 조명
-		GLfloat lightPos[] = { cos(3.14 * light_ro[0] / 180) * 150, 0, sin(3.14 * light_ro[0] / 180) * 150, 1 };
+		GLfloat AmbientLight[] = { light0[0], light0[0], light0[0], 0.0f };//주변 조명
+		GLfloat DiffuseLight[] = { light1[0], light1[0], 1.0, 0.0f };//산란 반사 조명
+		GLfloat SpecularLight[] = { light2[0], light2[0], 1.0, 0.0f };//거울반사 조명
+		GLfloat lightPos[] = { -250, 200, 0, 1 };
 		GLfloat specref[] = { 1,1,1,1 };
 
 		glLightfv(GL_LIGHT0, GL_AMBIENT, AmbientLight);
@@ -179,10 +285,10 @@ void drawScene()
 		glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
 
-		GLfloat AmbientLight1[] = { 0.1f, 0.1f, 0.1f, 0.0f };//주변 조명
-		GLfloat DiffuseLight1[] = { 0, light1[1], light1[1], 0.0f };//산란 반사 조명
-		GLfloat SpecularLight1[] = { 0, light2[1], light2[1], 0.0f };//거울반사 조명
-		GLfloat lightPos1[] = { cos(3.14 * light_ro[1] / 180) * 150, 0, sin(3.14 * light_ro[1] / 180) * 150, 0, 1 };
+		GLfloat AmbientLight1[] = { light0[1], light0[1], light0[1], 0.0f };//주변 조명
+		GLfloat DiffuseLight1[] = { 1, light1[1], light1[1], 0.0f };//산란 반사 조명
+		GLfloat SpecularLight1[] = { 1, light2[1], light2[1], 0.0f };//거울반사 조명
+		GLfloat lightPos1[] = { 250, 200, 0, 1 };
 
 		glLightfv(GL_LIGHT1, GL_AMBIENT, AmbientLight1);
 		glLightfv(GL_LIGHT1, GL_DIFFUSE, DiffuseLight1);
@@ -194,7 +300,7 @@ void drawScene()
 		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
 		glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
-		glMateriali(GL_FRONT, GL_SHININESS, 64);
+		glMateriali(GL_FRONT, GL_SHININESS, 62);
 
 
 
