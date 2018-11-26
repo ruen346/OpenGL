@@ -34,7 +34,8 @@ int robot_go = 1;
 int robot_ro = 0;
 int robot_sw = 0;
 
-int boom_r = 0;
+float boom_r = 0;
+int boom = 0;
 
 
 void SetupRC()
@@ -49,17 +50,17 @@ void SetupRC()
 
 	light0[0] = 0.1;
 	light0[1] = 0.1;
-	light1[0] = 0.5;
-	light1[1] = 0.5;
-	light2[0] = 0.2;
-	light2[1] = 0.2;
+	light1[0] = 1.5;
+	light1[1] = 1.5;
+	light2[0] = 0.4;
+	light2[1] = 0.4;
 
 	robot[2] = 150;
 
 	for (int i = 0; i < 100; i++)
 	{
 		for (int j = 0; j < 100; j++)
-		{
+		{	
 			tile_color[i][j] = 1;
 		}
 	}
@@ -73,6 +74,17 @@ void Timer(int value)
 		ball_turn += 5;
 	else
 		ball_turn = 0;
+
+	if (boom == 1)
+	{
+		if (boom_r < 200)
+			boom_r += 5;
+		else
+		{
+			boom_r = 0;
+			boom = 0;
+		}
+	}
 
 	if (snow_active == 1)
 	{
@@ -186,22 +198,34 @@ void special(int key, int x, int y)
 	if (key == GLUT_KEY_UP)
 	{
 		robot_go = 0;
-		robot[2] -= 5;
+		if (robot[2] <= 100 && robot[2] > 0 && robot[0] >= -100 && robot[0] <= 100)
+			boom = 1;
+		else
+			robot[2] -= 5;
 	}
 	else if (key == GLUT_KEY_DOWN)
 	{
 		robot_go = 1;
-		robot[2] += 5;
+		if (robot[2] >= -100 && robot[2] < 0 && robot[0] >= -100 && robot[0] <= 100)
+			boom = 1;
+		else
+			robot[2] += 5;
 	}
 	else if (key == GLUT_KEY_RIGHT)
 	{
 		robot_go = 3;
-		robot[0] += 5;
+		if (robot[0] >= -100 && robot[0] < 0 && robot[2] >= -100 && robot[2] <= 100)
+			boom = 1;
+		else
+			robot[0] += 5;
 	}
 	else if (key == GLUT_KEY_LEFT)
 	{
 		robot_go = 2;
-		robot[0] -= 5;
+		if (robot[0] <= 100 && robot[0] > 0 && robot[2] >= -100 && robot[2] <= 100)
+			boom = 1;
+		else
+			robot[0] -= 5;
 	}
 }
 
@@ -267,7 +291,7 @@ void drawScene()
 
 		GLfloat AmbientLight[] = { light0[0], light0[0], light0[0], 0.0f };//주변 조명
 		GLfloat DiffuseLight[] = { light1[0], light1[0], light1[0] * 2, 0.0f };//산란 반사 조명
-		GLfloat SpecularLight[] = { light2[0], light2[0], 0, 0.0f };//거울반사 조명
+		GLfloat SpecularLight[] = { light2[0], light2[0], light2[0], 0.0f };//거울반사 조명
 		GLfloat lightPos[] = { cos((light_ro + 180) * 3.14 / 180) * 250, 200, sin((light_ro + 180) * 3.14 / 180) * 250, 0 };
 
 		glLightfv(GL_LIGHT0, GL_AMBIENT, AmbientLight);
@@ -278,7 +302,7 @@ void drawScene()
 
 		GLfloat AmbientLight1[] = { light0[1], light0[1], light0[1], 0.0f };//주변 조명
 		GLfloat DiffuseLight1[] = { light1[1] * 2, light1[1], light1[1], 0.0f };//산란 반사 조명
-		GLfloat SpecularLight1[] = { 0, light2[1], light2[1], 0.0f };//거울반사 조명
+		GLfloat SpecularLight1[] = { light2[1], light2[1], light2[1], 0.0f };//거울반사 조명
 		GLfloat lightPos1[] = { cos(light_ro * 3.14 / 180) * 250, 200, sin(light_ro * 3.14 / 180) * 250, 0 };
 
 		glLightfv(GL_LIGHT1, GL_AMBIENT, AmbientLight1);
@@ -288,12 +312,12 @@ void drawScene()
 
 
 		GLfloat AmbientLight2[] = { 0, 0, 0, 0.0f };//주변 조명
-		GLfloat DiffuseLight2[] = { 1.0f, 1.0f,1.0f, 0.0f };//산란 반사 조명
+		GLfloat DiffuseLight2[] = { 5.0f, 5.0f,5.0f, 0.0f };//산란 반사 조명
 		GLfloat SpecularLight2[] = { 0.3f, 0.3f, 0.3f, 0.0f };//거울반사 조명
 		GLfloat lightPos2[] = { robot[0], 200, robot[2], 1 };
 		float spotlightDirection[] = { 0.0f, -1.0f, 0.0f };              // 스포트라이트 방향
-		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 45.0f);                  // 90도 원뿔
-		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 90.0f);                 // 초점 설정
+		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 50.0f);                  // 90도 원뿔
+		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 100.0f);                 // 초점 설정
 		glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, spotlightDirection);   // 방향 설정
 
 		glLightfv(GL_LIGHT2, GL_AMBIENT, AmbientLight2);
@@ -327,7 +351,20 @@ void drawScene()
 		glEnable(GL_LIGHT2);
 
 
-
+		for (float i = 0; i < 36; i++)
+		{
+			for (float j = 0; j < 36; j++)
+			{
+				glPushMatrix();//퍼퍼퍼퍼퍼퍼퍼펑
+				{
+					glTranslatef(robot[0], 0, robot[2]);
+					glTranslatef(cos(i * 3.14 / 18) * boom_r / 36 * (36 - j), sin(j * 3.14 / 18) * boom_r, sin(i * 3.14 / 18) * boom_r / 36 * (36 - j));
+					glColor3ub(255, 0, 0);
+					glutSolidCube(5);
+				}
+				glPopMatrix();
+			}
+		}
 
 		for (int i = 0; i < 100; i++)
 		{
