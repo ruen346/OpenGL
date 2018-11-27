@@ -442,41 +442,39 @@ void drawScene()
 		glPushMatrix();//중앙기둥
 		{
 			glColor3ub(20, 20, 20);
+			glEnable(GL_NORMALIZE);
+			glEnable(GL_AUTO_NORMAL);
 
+			glBegin(GL_TRIANGLES);
 			if (on == 1)
-			{
-				glEnable(GL_AUTO_NORMAL);
-				glNormal3f(0.0, 150.0, 0.0);
-			}
-			else
-				glDisable(GL_AUTO_NORMAL);
-
-			glBegin(GL_QUADS);
+				glNormal3f(0, 100, 50);
 			glVertex3f(0, 200, 0);//시작
 			glVertex3f(100, 0, 100);
 			glVertex3f(-100, 0, 100);
-			glVertex3f(0, 200, 0);
 			glEnd();
 
-			glBegin(GL_QUADS);
+			glBegin(GL_TRIANGLES);
+			if (on == 1)
+				glNormal3f(50, 100, -100);
 			glVertex3f(0, 200, 0);//시작
 			glVertex3f(100, 0, -100);
 			glVertex3f(100, 0, 100);
-			glVertex3f(0, 200, 0);
 			glEnd();
 
-			glBegin(GL_QUADS);
+			glBegin(GL_TRIANGLES);
+			if (on == 1)
+				glNormal3f(0, 100, -50);
 			glVertex3f(0, 200, 0);//시작
 			glVertex3f(-100, 0, -100);
 			glVertex3f(100, 0, -100);
-			glVertex3f(0, 200, 0);
 			glEnd();
 
-			glBegin(GL_QUADS);
+			glBegin(GL_TRIANGLES);
+			if (on == 1)
+				glNormal3f(-50, 100, -100);
 			glVertex3f(0, 200, 0);//시작
 			glVertex3f(-100, 0, 100);
 			glVertex3f(-100, 0, -100);
-			glVertex3f(0, 200, 0);
 			glEnd();
 		}
 		glPopMatrix();
