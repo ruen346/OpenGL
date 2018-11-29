@@ -26,6 +26,14 @@ struct Coster
 	int active = 0;
 };
 
+struct Cart
+{
+	int x = 0;
+	int y = 0;
+	int z = 0;
+	int go = 0;//50으로 나눠서 몇번째 점을 지나는지
+};
+
 Barrier barrier[10];
 
 Coster coster[20];
@@ -36,10 +44,9 @@ int mod = 2;//1:2d높이 2:2d탑뷰 3:3d
 int mod1_right_coster = 20;//우클릭시 지금 선택한 코스터 눌림 디폴트:20
 int mod2_right_coster = 20;//우클릭시 지금 선택한 코스터 눌림 디폴트:20
 
-int cart_x;
-int cart_y;
-int cart_z;
-int cart_go = 0;//50으로 나눠서 몇번째 점을 지나는지
+Cart cart[3];
+
+int weather_mod = 0;//0맑음 1비 2눈
 
 int x_ro = 0;
 int y_ro = 0;
@@ -60,35 +67,38 @@ void Timer(int value)
 {
 	if (mod == 3)
 	{
-		if (cart_go < coster_count * 50)
-			cart_go++;
-		else
-			cart_go = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			if (cart[i].go < coster_count * 50)
+				cart[i].go++;
+			else
+				cart[i].go = 0;
 
-		int p[4];
+			int p[4];
 
-		//카트위치
-		p[0] = cart_go / 50 - 1;
-		p[1] = cart_go / 50;
-		p[2] = cart_go / 50 + 1;
-		p[3] = cart_go / 50 + 2;
+			//카트위치
+			p[0] = cart[i].go / 50 - 1;
+			p[1] = cart[i].go / 50;
+			p[2] = cart[i].go / 50 + 1;
+			p[3] = cart[i].go / 50 + 2;
 
-		if (p[0] == -1)
-			p[0] = coster_count - 1;
-		if (p[2] >= coster_count)
-			p[2] -= coster_count;
-		if (p[3] >= coster_count)
-			p[3] -= coster_count;
+			if (p[0] == -1)
+				p[0] = coster_count - 1;
+			if (p[2] >= coster_count)
+				p[2] -= coster_count;
+			if (p[3] >= coster_count)
+				p[3] -= coster_count;
 
-		float j = cart_go % 50;
-		float t = j / 50.f;
+			float j = cart[i].go % 50;
+			float t = j / 50.f;
 
-		cart_x = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].x + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].x
-			+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].x + (t*t*t - t * t)*re_coster[p[3]].x) / 2;
-		cart_y = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].y + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].y
-			+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].y + (t*t*t - t * t)*re_coster[p[3]].y) / 2;
-		cart_z = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].z + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].z
-			+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].z + (t*t*t - t * t)*re_coster[p[3]].z) / 2;
+			cart[i].x = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].x + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].x
+				+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].x + (t*t*t - t * t)*re_coster[p[3]].x) / 2;
+			cart[i].y = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].y + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].y
+				+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].y + (t*t*t - t * t)*re_coster[p[3]].y) / 2;
+			cart[i].z = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].z + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].z
+				+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].z + (t*t*t - t * t)*re_coster[p[3]].z) / 2;
+		}
 	}
 
 	glutPostRedisplay();
@@ -124,10 +134,15 @@ void Keyboard(unsigned char key, int x, int y)
 			re_coster[i].active = coster[i].active;
 		}
 		
-		cart_x = re_coster[0].x;
-		cart_y = re_coster[0].y;
-		cart_z = re_coster[0].z;
-		cart_go = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			cart[i].x = re_coster[0].x;
+			cart[i].y = re_coster[0].y;
+			cart[i].z = re_coster[0].z;
+		}
+		cart[0].go = 10;
+		cart[1].go = 5;
+		cart[2].go = 0;
 		break;
 
 
@@ -150,6 +165,16 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case 'Z':
 		z_zoom -= 5;
+		break;
+
+	case 'i':
+		weather_mod = 0;
+		break;
+	case 'o':
+		weather_mod = 1;
+		break;
+	case 'p':
+		weather_mod = 2;
 		break;
 	}
 }
@@ -269,14 +294,29 @@ void drawScene()
 			}
 			glPopMatrix();
 
-			glPushMatrix();//카트
+			switch (weather_mod)//날씨
 			{
-				glTranslatef(cart_x, cart_y, cart_z);
+			case 0:
+				break;
 
-				glColor3ub(255, 0, 0);
-				glutSolidCube(30);
+			case 1:
+				break;
+
+			case 2:
+				break;
 			}
-			glPopMatrix();
+
+			for (int i = 0; i < 3; i++)//카트
+			{
+				glPushMatrix();
+				{
+					glTranslatef(cart[i].x, cart[i].y + 15, cart[i].z);
+
+					glColor3ub(255, 0, 0);
+					glutSolidCube(30);
+				}
+				glPopMatrix();
+			}
 
 			for (int i = 0; i < 10; i++)//장애물
 			{
