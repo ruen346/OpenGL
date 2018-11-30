@@ -48,6 +48,11 @@ Cart cart[3];
 
 int weather_mod = 0;//0讣澜 1厚 2传
 
+int snow_x[100];
+int snow_y[100];
+int snow_z[100];
+float snow_tile[100][100];//0.0~1.0祸惑
+
 int x_ro = 0;
 int y_ro = 0;
 int z_zoom = 0;
@@ -98,6 +103,22 @@ void Timer(int value)
 				+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].y + (t*t*t - t * t)*re_coster[p[3]].y) / 2;
 			cart[i].z = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].z + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].z
 				+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].z + (t*t*t - t * t)*re_coster[p[3]].z) / 2;
+
+			if (weather_mod == 2)
+			{
+				for (int i = 0; i < 100; i++)
+				{
+					if (snow_y[i] > 0)
+						snow_y[i] -= 2;
+					else
+					{
+						snow_tile[snow_x[i] / 10 + 500][snow_z[i] / 10 + 500] += 0.1;
+						snow_x[i] = rand() % 1000 - 500;
+						snow_y[i] = rand() % 200 + 200;
+						snow_z[i] = rand() % 1000 - 500;
+					}
+				}
+			}
 		}
 	}
 
@@ -303,6 +324,32 @@ void drawScene()
 				break;
 
 			case 2:
+				for (int i = 0; i < 100; i++)//传
+				{
+					glPushMatrix();
+					{
+						glTranslatef(snow_x[i], snow_y[i], snow_z[i]);
+
+						glColor3ub(220, 220, 220);
+						glutSolidCube(4);
+					}
+					glPopMatrix();
+				}
+				for (int i = 0; i < 100; i++)//传 鸥老
+				{
+					for (int j = 0; j < 100; j++)//传 鸥老
+					{
+						glPushMatrix();
+						{
+							glTranslatef(i * 10 - 500, 1, j * 10 - 500);
+							glScalef(10, 1, 10);
+
+							glColor3f(snow_tile[i][j], snow_tile[i][j], snow_tile[i][j]);
+							glutSolidCube(1);
+						}
+						glPopMatrix();
+					}
+				}
 				break;
 			}
 
