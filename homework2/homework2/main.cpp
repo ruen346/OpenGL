@@ -34,6 +34,19 @@ struct Cart
 	int go = 0;//50À¸·Î ³ª´²¼­ ¸î¹øÂ° Á¡À» Áö³ª´ÂÁö
 };
 
+struct Robot
+{
+	int x = 0;
+	int z = 0;
+	int move = 0;//»óÇÏÁÂ¿ì
+	int sw = 0;//¾ÕÀ¸·Î Èçµé±â µÚ·Î ÈçµéÁö
+	int ro = 0;//Èçµå´Â °¢µµ
+	int shot[50][3];//°³¼ö,ÁÂÇ¥
+	int shot_num = 0;
+	int shot_move[50];
+	int shot_active[50];
+};
+
 Barrier barrier[10];
 
 Coster coster[20];
@@ -51,7 +64,13 @@ int weather_mod = 0;//0¸¼À½ 1ºñ 2´«
 int snow_x[100];
 int snow_y[100];
 int snow_z[100];
-float snow_tile[100][100];//0.0~1.0»ö»ó
+
+int rain_x[100];
+int rain_y[100];
+int rain_z[100];
+
+Robot robot[2];
+int robot_crash = 0;//Ãæµ¹½Ã1
 
 int x_ro = 0;
 int y_ro = 0;
@@ -65,7 +84,26 @@ void SetupRC()
 		barrier[i].x = rand() % 800 - 400;
 		barrier[i].z = rand() % 800 - 400;
 	}
+	for (int i = 0; i < 10; i++)//´«
+	{
+		snow_x[i] = rand() % 1000 - 500;
+		snow_y[i] = rand() % 600;
+		snow_z[i] = rand() % 1000 - 500;
+	}
+	for (int i = 0; i < 10; i++)//ºñ
+	{
+		rain_x[i] = rand() % 1000 - 500;
+		rain_y[i] = rand() % 600;
+		rain_z[i] = rand() % 1000 - 500;
+	}
 	srand(time(NULL));
+
+	robot[0].x = -250;
+	robot[0].z = -250;
+	robot[0].move = 1;
+	robot[1].x = 250;
+	robot[1].z = 250;
+	robot[1].move = 0;
 }
 
 void Timer(int value)
@@ -104,7 +142,21 @@ void Timer(int value)
 			cart[i].z = ((-t * -t * -t + 2 * t * t - t)*re_coster[p[0]].z + (3 * t*t*t - 5 * t*t + 2)*re_coster[p[1]].z
 				+ (-3 * t*t*t + 4 * t*t + t)*re_coster[p[2]].z + (t*t*t - t * t)*re_coster[p[3]].z) / 2;
 
-			if (weather_mod == 2)
+			if (weather_mod == 1)
+			{
+				for (int i = 0; i < 100; i++)
+				{
+					if (rain_y[i] > 0)
+						rain_y[i] -= 2;
+					else
+					{
+						rain_x[i] = rand() % 1000 - 500;
+						rain_y[i] = rand() % 200 + 400;
+						rain_z[i] = rand() % 1000 - 500;
+					}
+				}
+			}
+			else if (weather_mod == 2)
 			{
 				for (int i = 0; i < 100; i++)
 				{
@@ -112,10 +164,114 @@ void Timer(int value)
 						snow_y[i] -= 2;
 					else
 					{
-						snow_tile[snow_x[i] / 10 + 500][snow_z[i] / 10 + 500] += 0.1;
 						snow_x[i] = rand() % 1000 - 500;
-						snow_y[i] = rand() % 200 + 200;
+						snow_y[i] = rand() % 200 + 400;
 						snow_z[i] = rand() % 1000 - 500;
+					}
+				}
+			}
+
+			for (int i = 0; i < 2; i++)
+			{
+				int crash = 0;
+
+				if (robot[i].sw == 0)
+				{
+					if (robot[i].ro < 45)
+						robot[i].ro += 2;
+					else
+						robot[i].sw = 1;
+				}
+				else if (robot[i].sw == 1)
+				{
+					if (robot[i].ro > -45)
+						robot[i].ro -= 2;
+					else
+						robot[i].sw = 0;
+				}
+
+				for (int j = 0; j < 10; j++)
+				{
+					switch (robot[i].move)
+					{
+					case 0:
+						if (robot[i].x > barrier[j].x - 15 && robot[i].x < barrier[j].x + 15 && robot[i].z - 2 > barrier[j].z - 15 && robot[i].z - 2 < barrier[j].z + 15)
+							crash = 1;
+						break;
+					case 1:
+						if (robot[i].x > barrier[j].x - 15 && robot[i].x < barrier[j].x + 15 && robot[i].z + 2 > barrier[j].z - 15 && robot[i].z + 2 < barrier[j].z + 15)
+							crash = 1;
+						break;
+					case 2:
+						if (robot[i].x - 2 > barrier[j].x - 15 && robot[i].x - 2 < barrier[j].x + 15 && robot[i].z > barrier[j].z - 15 && robot[i].z < barrier[j].z + 15)
+							crash = 1;
+						break;
+					case 3:
+						if (robot[i].x + 2 > barrier[j].x - 15 && robot[i].x + 2 < barrier[j].x + 15 && robot[i].z > barrier[j].z - 15 && robot[i].z < barrier[j].z + 15)
+							crash = 1;
+						break;
+					}
+				}
+
+				switch (robot[i].move)
+				{
+				case 0:
+					if (crash == 0 && robot[i].z - 2 > -500)
+						robot[i].z -= 2;
+					else
+						robot[i].move = rand() % 4;
+					break;
+
+				case 1:
+					if (crash == 0 && robot[i].z + 2 < 500)
+						robot[i].z += 2;
+					else
+						robot[i].move = rand() % 4;
+					break;
+
+				case 2:
+					if (crash == 0 && robot[i].x - 2 > -500)
+						robot[i].x -= 2;
+					else
+						robot[i].move = rand() % 4;
+					break;
+
+				case 3:
+					if (crash == 0 && robot[i].x + 2 < 500)
+						robot[i].x += 2;
+					else
+						robot[i].move = rand() % 4;
+					break;
+				}
+
+				for (int j = 0; j < 50; j++)
+				{
+					if (robot[i].shot_active[j] == 1)
+					{
+						switch (robot[i].shot_move[j])
+						{
+						case 0:
+							robot[i].shot[j][2] -= 5;
+							break;
+						case 1:
+							robot[i].shot[j][2] += 5;
+							break;
+						case 2:
+							robot[i].shot[j][0] -= 5;
+							break;
+						case 3:
+							robot[i].shot[j][0] += 5;
+							break;
+						}
+
+						if (robot[i].shot[j][0] < -500 || robot[i].shot[j][0] > 500 || robot[i].shot[j][2] < -500 || robot[i].shot[j][2] > 500)
+							robot[i].shot_active[j] = 0;
+
+						for (int l = 0; l < 10; l++)
+						{
+							if (robot[i].shot[j][0] > barrier[l].x - 10 && robot[i].shot[j][0] < barrier[l].x + 10 && robot[i].shot[j][2] > barrier[l].z - 10 && robot[i].shot[j][2] < barrier[l].z + 10)
+								robot[i].shot_active[j] = 0;
+						}
 					}
 				}
 			}
@@ -196,6 +352,38 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case 'p':
 		weather_mod = 2;
+		break;
+
+	case 'w':
+		robot[0].move = 0;
+		break;
+	case 's':
+		robot[0].move = 1;
+		break;
+	case 'a':
+		robot[0].move = 2;
+		break;
+	case 'd':
+		robot[0].move = 3;
+		break;
+
+	case 'q':
+		robot[0].shot[robot[0].shot_num][0] = robot[0].x;
+		robot[0].shot[robot[0].shot_num][2] = robot[0].z;
+		robot[0].shot_move[robot[0].shot_num] = robot[0].move;
+		robot[0].shot_active[robot[0].shot_num] = 1;
+		robot[0].shot_num++;
+		if (robot[0].shot_num == 50)
+			robot[0].shot_num = 0;
+		break;
+	case 'e':
+		robot[1].shot[robot[1].shot_num][0] = robot[1].x;
+		robot[1].shot[robot[1].shot_num][2] = robot[1].z;
+		robot[1].shot_move[robot[1].shot_num] = robot[1].move;
+		robot[1].shot_active[robot[1].shot_num] = 1;
+		robot[1].shot_num++;
+		if (robot[1].shot_num == 50)
+			robot[1].shot_num = 0;
 		break;
 	}
 }
@@ -321,6 +509,18 @@ void drawScene()
 				break;
 
 			case 1:
+				for (int i = 0; i < 100; i++)//ºñ
+				{
+					glPushMatrix();
+					{
+						glTranslatef(rain_x[i], rain_y[i], rain_z[i]);
+
+						glColor3ub(50, 50, 255);
+						glScalef(1, 10, 1);
+						glutSolidCube(2);
+					}
+					glPopMatrix();
+				}
 				break;
 
 			case 2:
@@ -334,21 +534,6 @@ void drawScene()
 						glutSolidCube(4);
 					}
 					glPopMatrix();
-				}
-				for (int i = 0; i < 100; i++)//´« Å¸ÀÏ
-				{
-					for (int j = 0; j < 100; j++)//´« Å¸ÀÏ
-					{
-						glPushMatrix();
-						{
-							glTranslatef(i * 10 - 500, 1, j * 10 - 500);
-							glScalef(10, 1, 10);
-
-							glColor3f(snow_tile[i][j], snow_tile[i][j], snow_tile[i][j]);
-							glutSolidCube(1);
-						}
-						glPopMatrix();
-					}
 				}
 				break;
 			}
@@ -452,6 +637,119 @@ void drawScene()
 					glPopMatrix();
 				}
 			}
+			
+			for (int i = 0; i < 2; i++)//³ª´Â¾ß ·Îº¿Æ®¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ
+			{
+				glPushMatrix();//¸öµ¿¾Æ¸®
+				{
+					glTranslatef(robot[i].x, 0, robot[i].z);
+					switch (robot[i].move)
+					{
+					case 0:
+						glRotatef(180, 0, 1, 0); break;
+					case 1:
+						glRotatef(0, 0, 1, 0); break;
+					case 2:
+						glRotatef(-90, 0, 1, 0); break;
+					case 3:
+						glRotatef(90, 0, 1, 0); break;
+					}
+
+					glPushMatrix();//´Ù¸®1
+					{
+						glTranslatef(-10, 25, 0);
+						glRotatef(robot[i].ro, 1, 0, 0);
+						glTranslatef(10, -25, 0);
+
+						glTranslatef(-10, 12.5, 0);
+						glColor3ub(255, 168, 146);
+						glScalef(1, 5, 1);
+						glutSolidCube(5);
+					}
+					glPopMatrix();
+
+					glPushMatrix();//´Ù¸®2
+					{
+						glTranslatef(10, 25, 0);
+						glRotatef(-robot[i].ro, 1, 0, 0);
+						glTranslatef(-10, -25, 0);
+
+						glTranslatef(10, 12.5, 0);
+						glColor3ub(63, 204, 255);
+						glScalef(1, 5, 1);
+						glutSolidCube(5);
+					}
+					glPopMatrix();
+
+					glPushMatrix();//¸ö
+					{
+						glTranslatef(0, 37.5, 0);
+						glColor3ub(255, 206, 145);
+						glScalef(5, 5, 1);
+						glutSolidCube(5);
+					}
+					glPopMatrix();
+
+					glPushMatrix();//ÆÈ1
+					{
+						glTranslatef(-15, 50, 0);
+						glRotatef(-robot[i].ro, 1, 0, 0);
+						glTranslatef(15, -50, 0);
+
+						glTranslatef(-15, 37.5, 0);
+						glColor3ub(155, 90, 61);
+						glScalef(1, 5, 1);
+						glutSolidCube(5);
+					}
+					glPopMatrix();
+
+					glPushMatrix();//ÆÈ2
+					{
+						glTranslatef(-15, 50, 0);
+						glRotatef(robot[i].ro, 1, 0, 0);
+						glTranslatef(15, -50, 0);
+
+						glTranslatef(15, 37.5, 0);
+						glColor3ub(255, 72, 140);
+						glScalef(1, 5, 1);
+						glutSolidCube(5);
+					}
+					glPopMatrix();
+
+					glPushMatrix();//¸Ó¸®
+					{
+						glTranslatef(0, 57.5, 0);
+						glColor3ub(193, 193, 193);
+						glScalef(3, 3, 1);
+						glutSolidCube(5);
+					}
+					glPopMatrix();
+
+					glPushMatrix();//ÄÚ
+					{
+						glTranslatef(0, 57.5, 1);
+						glColor3ub(158, 162, 255);
+						glScalef(2, 2, 1);
+						glutSolidCube(2);
+					}
+					glPopMatrix();
+				}
+				glPopMatrix();
+
+				for (int j = 0; j < 50; j++)
+				{
+					glPushMatrix();//ÃÑ¾Ë
+					{
+						if (robot[i].shot_active[j] == 1)
+						{
+							glTranslatef(robot[i].shot[j][0], 30, robot[i].shot[j][2]);
+							glColor3ub(30, 30, 30);
+							glutSolidCube(5);
+						}
+					}
+					glPopMatrix();
+				}
+			}		
 		}
 		glPopMatrix();
 
