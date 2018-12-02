@@ -1,1 +1,11 @@
-﻿  ex1.vcxproj -> C:\Users\구건모\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
+﻿  ex1_30.cpp
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(26): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(113): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(149): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(150): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(156): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(157): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(332): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(337): warning C4838: 'int'에서 'GLfloat'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(336): warning C4244: '초기화 중': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ex1.vcxproj -> C:\Users\rnrjs\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
