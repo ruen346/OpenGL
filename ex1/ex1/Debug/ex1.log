@@ -1,11 +1,8 @@
-﻿  ex1_30.cpp
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(26): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(113): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(149): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(150): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(156): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(157): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(332): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(337): warning C4838: 'int'에서 'GLfloat'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\rnrjs\desktop\개발\opengl\ex1\ex1\ex1_30.cpp(336): warning C4244: '초기화 중': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ex1.vcxproj -> C:\Users\rnrjs\Desktop\개발\OpenGL\ex1\Debug\ex1.exe
+﻿  ex1_35.cpp
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_35.cpp(55): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_35.cpp(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: 'fopen' 선언을 참조하십시오.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_35.cpp(85): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_35.cpp(124): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\구건모\desktop\개발\opengl\ex1\ex1\ex1_35.cpp(161): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ex1.vcxproj -> C:\Users\구건모\Desktop\개발\OpenGL\ex1\Debug\ex1.exe

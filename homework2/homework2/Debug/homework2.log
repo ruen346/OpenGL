@@ -1,44 +1,45 @@
-﻿  main.cpp
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(86): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(107): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(126): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(127): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(128): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(129): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(147): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(148): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(149): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(150): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(160): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(161): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(165): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(167): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(169): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(355): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(356): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(357): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(439): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(443): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(454): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(455): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(490): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(497): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(498): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(505): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(605): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(628): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(643): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(657): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(669): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(773): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(789): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(802): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(824): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(837): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(870): warning C4838: 'int'에서 'GLfloat'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(869): warning C4244: '초기화 중': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(870): warning C4244: '초기화 중': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(888): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(919): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\rnrjs\desktop\개발\opengl\homework2\homework2\main.cpp(1009): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  homework2.vcxproj -> C:\Users\rnrjs\Desktop\개발\OpenGL\homework2\Debug\homework2.exe
+﻿  컴그그숙제2구건모.cpp
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(86): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(107): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(126): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(127): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(128): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(129): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(147): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(148): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(149): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(150): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(160): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(161): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(165): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(167): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(169): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(355): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(356): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(357): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(439): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(443): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(454): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(455): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(490): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(497): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(498): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(505): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(605): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(628): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(643): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(657): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(669): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(773): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(789): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(802): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(824): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(837): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(870): warning C4838: 'int'에서 'GLfloat'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(869): warning C4244: '초기화 중': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(870): warning C4244: '초기화 중': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(888): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(919): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\opengl\homework2\homework2\컴그그숙제2구건모.cpp(1009): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LINK : C:\Users\구건모\Desktop\개발\OpenGL\homework2\Debug\homework2.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  homework2.vcxproj -> C:\Users\구건모\Desktop\개발\OpenGL\homework2\Debug\homework2.exe
