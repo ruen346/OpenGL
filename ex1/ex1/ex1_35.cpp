@@ -3,14 +3,15 @@
 #include <time.h>
 #include <iostream>
 #include <math.h>
+#include <windows.h>
 using namespace std;
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
 GLUquadricObj *glu_fill;
 GLUquadricObj *glu_line;
 
-int y_ro = 0;
-
+int x_ro = 30;
+int y_ro = 30;
 
 GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info) 
 {
@@ -72,21 +73,85 @@ GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info)
 	return bits;
 }
 
-GLubyte * TexBits;
+GLubyte *TexBits; // 데이터를 가리킬 포인터
+BITMAPINFO *info; // 비트맵 헤더 저장할 변수
+GLuint texture_object[6];
+GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info);
 
 
 void SetupRC()
 {
-	BITMAPINFO *texture;
-	TexBits = LoadDIBitmap("image1.bmp", &texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2355, 1750, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glGenTextures(6, texture_object);
+
+	// 1
+	glBindTexture(GL_TEXTURE_2D, texture_object[0]);
+	TexBits = LoadDIBitmap("ex1_35_image\\1.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 200, 200, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// 2
+	glBindTexture(GL_TEXTURE_2D, texture_object[1]);
+	TexBits = LoadDIBitmap("ex1_35_image\\2.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 200, 200, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// 3
+	glBindTexture(GL_TEXTURE_2D, texture_object[2]);
+	TexBits = LoadDIBitmap("ex1_35_image\\3.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 200, 200, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// 4
+	glBindTexture(GL_TEXTURE_2D, texture_object[3]);
+	TexBits = LoadDIBitmap("ex1_35_image\\4.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 200, 200, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// 5
+	glBindTexture(GL_TEXTURE_2D, texture_object[4]);
+	TexBits = LoadDIBitmap("ex1_35_image\\5.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 200, 200, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// 6
+	glBindTexture(GL_TEXTURE_2D, texture_object[5]);
+	TexBits = LoadDIBitmap("ex1_35_image\\6.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 200, 200, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, TexBits);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// 텍스처 모드 설정
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, GL_MODULATE);
+	// 텍스처 매핑 활성화
 	glEnable(GL_TEXTURE_2D);
 
-	srand(time(NULL));
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 }
 
 void Timer(int value)
 {
+	if (y_ro < 355)
+		y_ro += 5;
+	else
+		y_ro = 0;
 
 	glutPostRedisplay();
 	glutTimerFunc(20, Timer, 1);
@@ -158,9 +223,84 @@ void drawScene()
 			0.0, 0.0, -1.0, //AT
 			0.0, 1.0, 0.0); //UP
 
+		glRotatef(x_ro, 1, 0, 0);
 		glRotatef(y_ro, 0, 1, 0);
 
+		glPushMatrix();
+		{
+			glBindTexture(GL_TEXTURE_2D, texture_object[0]);
+			glBegin(GL_QUADS);
+			glTexCoord2d(0.0f, 1.0f);
+			glVertex3f(-100.0, 100.0, 100.0); 
+			glTexCoord2d(0.0f, 0.0f);
+			glVertex3f(-100.0, -100.0, 100.0);
+			glTexCoord2d(1.0f, 0.0f);
+			glVertex3f(100.0, -100.0, 100.0);
+			glTexCoord2d(1.0f, 1.0f);
+			glVertex3f(100.0, 100.0, 100.0);
+			glEnd();
 
+			glBindTexture(GL_TEXTURE_2D, texture_object[1]);
+			glBegin(GL_QUADS);
+			glTexCoord2d(0.0f, 1.0f);
+			glVertex3f(100.0, 100.0, 100.0);
+			glTexCoord2d(0.0f, 0.0f);
+			glVertex3f(100.0, -100.0, 100.0);  
+			glTexCoord2d(1.0f, 0.0f);
+			glVertex3f(100.0, -100.0, -100.0);
+			glTexCoord2d(1.0f, 1.0f);
+			glVertex3f(100.0, 100.0, -100.0);
+			glEnd();
+
+			glBindTexture(GL_TEXTURE_2D, texture_object[2]);
+			glBegin(GL_QUADS);
+			glTexCoord2d(0.0f, 1.0f);
+			glVertex3f(-100.0, 100.0, -100.0);  
+			glTexCoord2d(0.0f, 0.0f);
+			glVertex3f(100.0, 100.0, -100.0); 
+			glTexCoord2d(1.0f, 0.0f);
+			glVertex3f(100.0, -100.0, -100.0);
+			glTexCoord2d(1.0f, 1.0f);
+			glVertex3f(-100.0, -100.0, -100.0); 
+			glEnd();
+
+			glBindTexture(GL_TEXTURE_2D, texture_object[3]);
+			glBegin(GL_QUADS);
+			glTexCoord2d(0.0f, 1.0f);
+			glVertex3f(-100.0, 100.0, 100.0);
+			glTexCoord2d(0.0f, 0.0f);
+			glVertex3f(-100.0, 100.0, -100.0); 
+			glTexCoord2d(1.0f, 0.0f);
+			glVertex3f(-100.0, -100.0, -100.0);
+			glTexCoord2d(1.0f, 1.0f);
+			glVertex3f(-100.0, -100.0, 100.0);
+			glEnd();
+
+			glBindTexture(GL_TEXTURE_2D, texture_object[4]);
+			glBegin(GL_QUADS);
+			glTexCoord2d(0.0f, 1.0f);
+			glVertex3f(-100.0, -100.0, 100.0);
+			glTexCoord2d(0.0f, 0.0f);
+			glVertex3f(-100.0, -100.0, -100.0);
+			glTexCoord2d(1.0f, 0.0f);
+			glVertex3f(100.0, -100.0, -100.0);
+			glTexCoord2d(1.0f, 1.0f);
+			glVertex3f(100.0, -100.0, 100.0);
+			glEnd();
+
+			glBindTexture(GL_TEXTURE_2D, texture_object[5]);
+			glBegin(GL_QUADS);
+			glTexCoord2d(0.0f, 1.0f);
+			glVertex3f(-100.0, 100.0, 100.0);
+			glTexCoord2d(0.0f, 0.0f);
+			glVertex3f(100.0, 100.0, 100.0);
+			glTexCoord2d(1.0f, 0.0f);
+			glVertex3f(100.0, 100.0, -100.0);
+			glTexCoord2d(1.0f, 1.0f);
+			glVertex3f(-100.0, 100.0, -100.0);
+			glEnd();
+		}
+		glPopMatrix();
 	}
 	glPopMatrix();
 	glutSwapBuffers();
@@ -173,7 +313,7 @@ void Reshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60.0, 1.0, 1.0, 1000.0);
-	glTranslatef(0.0, 0.0, -300.0);
+	glTranslatef(0.0, 0.0, -500.0);
 
 	glMatrixMode(GL_MODELVIEW);
 }
